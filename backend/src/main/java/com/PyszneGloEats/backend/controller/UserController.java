@@ -17,6 +17,7 @@ public class UserController {
     public User getUser(@PathVariable Long id) {
         return userService.getUser(id);
     }
+    //Test git
 
     @GetMapping("/getName/{name}")
     public User getUserName(@PathVariable String name) {
