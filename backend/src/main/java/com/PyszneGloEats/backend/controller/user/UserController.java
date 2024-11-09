@@ -1,9 +1,8 @@
-package com.PyszneGloEats.backend.controller;
+package com.PyszneGloEats.backend.controller.user;
 
 import com.PyszneGloEats.backend.dto.UserRegister;
 import com.PyszneGloEats.backend.model.User;
 import com.PyszneGloEats.backend.service.UserService;
-import jakarta.persistence.Id;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,10 +23,10 @@ public class UserController {
         return userService.getUserName(name);
     }
 
-    @PostMapping("/register")
-    public User registerUser(@RequestBody UserRegister userRegister) {
-        return  userService.userRegister(userRegister);
-    }
+//    @PostMapping("/register")
+//    public User registerUser(@RequestBody UserRegister userRegister) {
+//        return  userService.userRegister(userRegister);
+//    }
 
 
 }
