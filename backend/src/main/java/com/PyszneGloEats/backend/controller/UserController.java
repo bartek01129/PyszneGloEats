@@ -1,4 +1,4 @@
-package com.PyszneGloEats.backend.controller.user;
+package com.PyszneGloEats.backend.controller;
 
 import com.PyszneGloEats.backend.dto.UserRegister;
 import com.PyszneGloEats.backend.model.User;
@@ -23,10 +23,7 @@ public class UserController {
         return userService.getUserName(name);
     }
 
-//    @PostMapping("/register")
-//    public User registerUser(@RequestBody UserRegister userRegister) {
-//        return  userService.userRegister(userRegister);
-//    }
+ 
 
 
 }
