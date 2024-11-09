@@ -15,10 +15,6 @@ public class UserService {
         return userRepository.findById(ID).orElseThrow();
     }
 
-    public User userRegister(UserRegister userRegister) {
-     User user = new User(userRegister.getName(),userRegister.getPassword(), User.Role.ROLE_GUEST);
-     return userRepository.save(user);
-    }
 
     public User getUserName(String name) {
         return userRepository.findByName(name).orElseThrow();

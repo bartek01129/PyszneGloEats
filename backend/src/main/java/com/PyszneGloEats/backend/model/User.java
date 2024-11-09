@@ -30,4 +30,6 @@ public class User {
         ROLE_GUEST,
         ROLE_COOK
     }
+
+
 }
