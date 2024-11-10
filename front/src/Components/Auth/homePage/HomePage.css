@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.container-fluid {
+  display: flex;
+  height: 70%;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+}
+
+.btn {
+  margin: 10px;
+}

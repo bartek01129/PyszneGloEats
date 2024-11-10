@@ -1,14 +1,13 @@
-import LoginForm from "./Components/LoginForm/LoginForm"
-
-
+import { BrowserRouter as Router } from 'react-router-dom';
+import AuthRouter from './Components/routes/AuthRouter';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-
   return (
-    <>
-      <LoginForm/> 
-    </>
-  )
+    <Router>
+      <AuthRouter />
+    </Router>
+  );
 }
 
-export default App
+export default App;
