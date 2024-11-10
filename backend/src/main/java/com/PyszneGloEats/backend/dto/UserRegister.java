@@ -9,5 +9,4 @@ import lombok.ToString;
 public class UserRegister {
     private String name;
     private String password;
-    private User.Role role;
 }

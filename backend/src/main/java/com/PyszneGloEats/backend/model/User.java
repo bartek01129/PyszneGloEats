@@ -18,7 +18,7 @@ public class User {
     private String name;
     private String password;
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Role role = Role.ROLE_GUEST;
 
     public User(String name, String password, Role role) {
         this.name = name;
@@ -28,7 +28,8 @@ public class User {
 
     public enum Role {
         ROLE_GUEST,
-        ROLE_COOK
+        ROLE_COOK,
+        ROLE_ADMIN
     }
 
 

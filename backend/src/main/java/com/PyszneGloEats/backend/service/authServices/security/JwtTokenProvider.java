@@ -20,11 +20,8 @@ public class JwtTokenProvider {
     private long EXPIRATION_TIME;
 
     public String generateToken(String subject, String role) {
-        var claims = new HashMap<String, Object>();
-        claims.put("role", role);
 
         return Jwts.builder()
-                .setClaims(claims)
                .setSubject(subject)
                .setIssuedAt(new Date())
                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
