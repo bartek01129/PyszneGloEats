@@ -35,7 +35,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
+                        .requestMatchers("/admin/**").permitAll()  //    hasAnyAuthority("ROLE_ADMIN")
                         .requestMatchers("/guest/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_GUEST")
                         .requestMatchers("/cook/**").hasAnyAuthority("ROLE_COOK", "ROLE_ADMIN")
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/webjars/**").permitAll()  //Autoryzacja na czas development

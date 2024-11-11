@@ -10,7 +10,7 @@ export const AdminApi = () => {
   const [role, setRole] = useState('');
 
   const updateRole = (id, role) => {
-    const API_URL_UPDATE = `http://localhost:8080/admin/${id}/${role}`;
+    const API_URL_UPDATE = `http://localhost:8080/admin/update/${id}/${role}`;
 
     fetch(API_URL_UPDATE, {
       method: 'PUT',
@@ -23,9 +23,11 @@ export const AdminApi = () => {
       .catch((err) => console.log(err));
   };
 
+
+
   const handleRoleChange = (id, e) => {
     const selectedRole = e.target.value;
-    setRole(selectedRole);
+    setRole(selectedRole);   // PUSTY ROLE
     updateRole(id, role);
   };
 
