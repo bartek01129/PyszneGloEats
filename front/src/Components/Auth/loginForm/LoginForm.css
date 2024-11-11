@@ -4,11 +4,12 @@
   box-sizing: border-box;
 }
 
-body {
+.webBody {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  min-width: 100vw;
   background: url('../../../assets/background_LoginPage.jpg');
   background-size: cover;
   background-position: center;

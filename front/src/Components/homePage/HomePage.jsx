@@ -12,7 +12,7 @@ const HomePage = () => {
   };
 
   return (
-    <>
+    <div className="homeBody">
       <div className="container-fluid">
         <h1>Welcome to PyszneGloEats!</h1>
         <p>
@@ -38,7 +38,7 @@ const HomePage = () => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

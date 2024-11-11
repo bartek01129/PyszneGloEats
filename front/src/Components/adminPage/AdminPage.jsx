@@ -1,9 +1,11 @@
+import { AdminApi } from './AdminApi';
+import './AdminPage.css';
+
 const AdminPage = () => {
   return (
-    <>
-      <h1>ADMIN PAGE</h1>
-      <p>ALL USERS</p>
-    </>
+    <div className="adminBody">
+      <AdminApi />
+    </div>
   );
 };
 
