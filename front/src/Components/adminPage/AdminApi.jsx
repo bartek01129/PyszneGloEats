@@ -7,7 +7,6 @@ const roleOption = ['ROLE_ADMIN', 'ROLE_GUEST', 'ROLE_COOK'];
 export const AdminApi = () => {
   const token = localStorage.getItem('token');
   const [users, setUsers] = useState([]);
-  const [role, setRole] = useState('');
 
   const updateRole = (id, role) => {
     const API_URL_UPDATE = `http://localhost:8080/admin/update/${id}/${role}`;
@@ -19,16 +18,13 @@ export const AdminApi = () => {
       },
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
       .catch((err) => console.log(err));
   };
 
-
-
   const handleRoleChange = (id, e) => {
     const selectedRole = e.target.value;
-    setRole(selectedRole);   // PUSTY ROLE
-    updateRole(id, role);
+    updateRole(id, selectedRole);
+    window.location.reload();
   };
 
   useEffect(() => {

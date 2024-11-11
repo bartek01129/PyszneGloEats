@@ -13,6 +13,7 @@ function ProtectedRoute({ children, requiredRole }) {
   let roles = [];
   roles = decodedToken.aub;
   if (!roles.includes(requiredRole)) {
+    console.log('Nie masz odpowiedniej roli');
     return <Navigate to="/auth/login" replace />;
   }
   return children;
