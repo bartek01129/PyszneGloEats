@@ -23,7 +23,7 @@ const LoginForm = () => {
       const decodedPayload = JSON.parse(atob(tokenPayload));
       console.log(decodedPayload.aud);
       if (decodedPayload.aud == 'ROLE_GUEST') {
-        console.log('GUEST');
+        navigate('/guest/products');
       } else if (decodedPayload.aud == 'ROLE_ADMIN') {
         console.log('ADMIN');
         navigate('/admin/users');
