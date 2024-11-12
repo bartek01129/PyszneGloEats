@@ -9,6 +9,7 @@ import lombok.ToString;
 @Entity
 @Getter@Setter@ToString
 @NoArgsConstructor
+
 @Table(name = "menu_items",uniqueConstraints = @UniqueConstraint(columnNames = "productName"))
 public class MenuItem {
     @Id
@@ -18,4 +19,9 @@ public class MenuItem {
     private String description;
     private Double price;
 
+    public MenuItem(String productName, String description, Double price) {
+        this.productName = productName;
+        this.description = description;
+        this.price = price;
+    }
 }

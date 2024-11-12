@@ -1,22 +1,27 @@
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-function ProtectedRoute({ children, requiredRole }) {
+function checkRole(requiredRole) {
   const token = localStorage.getItem('token');
-  const location = useLocation();
-  const tokenPayload = token.split('.')[1];
-  const decodedToken = JSON.parse(atob(tokenPayload));
 
-  if (!token) {
-    return <Navigate to="/auth/login" state={{ from: location }} replace />;
-  }
+  if (!token) return <Navigate to="/auth/login" replace />;
 
-  let roles = [];
-  roles = decodedToken.aub;
-  if (!roles.includes(requiredRole)) {
-    console.log('Nie masz odpowiedniej roli');
-    return <Navigate to="/auth/login" replace />;
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.aud === requiredRole;
+  } catch (error) {
+    console.log(error);
+    return false;
   }
-  return children;
 }
 
+const ProtectedRoute = ({ element, role }) => {
+  const hasAccess = checkRole(role);
+  return hasAccess ? element : <Navigate to="/auth/page403" replace />;
+};
+
+ProtectedRoute.propTypes = {
+  element: PropTypes.element.isRequired,
+  role: PropTypes.string.isRequired,
+};
 export default ProtectedRoute;

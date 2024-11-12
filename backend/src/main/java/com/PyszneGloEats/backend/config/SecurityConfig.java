@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/admin/**").permitAll()  //    hasAnyAuthority("ROLE_ADMIN")
-                        .requestMatchers("/guest/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_GUEST")
+                        .requestMatchers("/guest/**").permitAll() //.hasAnyAuthority("ROLE_ADMIN", "ROLE_GUEST")
                         .requestMatchers("/cook/**").hasAnyAuthority("ROLE_COOK", "ROLE_ADMIN")
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/webjars/**").permitAll()  //Autoryzacja na czas development
                         .anyRequest().authenticated()

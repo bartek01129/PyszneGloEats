@@ -4,14 +4,12 @@ import { FaUserAlt } from 'react-icons/fa';
 import { FaUnlock } from 'react-icons/fa';
 import { login } from './LoginApi';
 import { useNavigate } from 'react-router-dom';
-import { Link } from "react-router-dom";
-
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
 
   const loginSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +25,7 @@ const LoginForm = () => {
       if (decodedPayload.aud == 'ROLE_GUEST') {
         console.log('GUEST');
       } else if (decodedPayload.aud == 'ROLE_ADMIN') {
+        console.log('ADMIN');
         navigate('/admin/users');
       } else if (decodedPayload.aud == 'ROLE_COOK') {
         console.log('COOK');
@@ -47,7 +46,6 @@ const LoginForm = () => {
               type="text"
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Username"
-              onFocus=""
               required
             />
             <FaUserAlt className="icon" />
@@ -62,7 +60,7 @@ const LoginForm = () => {
             <FaUnlock className="icon" />
           </div>
           <div className="forgot-password">
-            <a href='#'>Forgot password?</a>
+            <a href="#">Forgot password?</a>
           </div>
 
           <button type="submit" onClick={loginSubmit}>

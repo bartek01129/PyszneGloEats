@@ -13,7 +13,7 @@ const HomePage = () => {
 
   return (
     <div className="homeBody">
-      <div className="container-fluid">
+      <div className="container-fluid homeContainer">
         <h1>Welcome to PyszneGloEats!</h1>
         <p>
           Nasz restauracja oferuje szeroką gamę dań z całego świata, w tym

@@ -1,0 +1,63 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.full-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  color: #fff;
+}
+
+.container-403page {
+  text-align: center;
+  padding: 20px;
+  max-width: 600px;
+}
+
+.error-title {
+  font-size: 72px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.error-reason {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.error-list {
+  list-style: none;
+  padding: 0;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.error-item {
+  margin-bottom: 10px;
+}
+
+.error-button {
+  text-decoration: none;
+  background-color: #fff;
+  color: #ff7e5f;
+  padding: 12px 25px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.error-button:hover {
+  background-color: #ffe0d4;
+}
