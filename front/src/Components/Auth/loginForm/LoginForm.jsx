@@ -4,11 +4,14 @@ import { FaUserAlt } from 'react-icons/fa';
 import { FaUnlock } from 'react-icons/fa';
 import { login } from './LoginApi';
 import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
+
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+
 
   const loginSubmit = async (e) => {
     e.preventDefault();
@@ -44,6 +47,7 @@ const LoginForm = () => {
               type="text"
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Username"
+              onFocus=""
               required
             />
             <FaUserAlt className="icon" />
@@ -58,7 +62,7 @@ const LoginForm = () => {
             <FaUnlock className="icon" />
           </div>
           <div className="forgot-password">
-            <a href="#">Forgot password?</a>
+            <a href='#'>Forgot password?</a>
           </div>
 
           <button type="submit" onClick={loginSubmit}>
@@ -67,7 +71,7 @@ const LoginForm = () => {
 
           <div className="register-link">
             <p>
-              You hungry? <a href="#">Register</a>
+              You hungry? <Link to="/auth/register">Register</Link>
             </p>
           </div>
         </form>
