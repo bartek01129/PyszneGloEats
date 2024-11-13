@@ -7,13 +7,9 @@ export const GuestApi = () => {
   const token = localStorage.getItem('token');
   const [products, setProducts] = useState([]);
 
-  const images = import.meta.glob('../../assets/products/*'); //pobranie zdjec w obiekcie meta.glob
-  let gallery = [];
-
-  for (const path in images) {
-    const imageName = path.split('/').pop();
-    const p = new URL(path, import.meta.url).href; //wyciagniecie elementow z images i nadanie im url
-    gallery.push({ imageName, p });
+  function getImage(imgName) {
+    return new URL(`../../assets/products/${imgName}.jpg`, import.meta.url)
+      .href;
   }
 
   useEffect(() => {
@@ -30,16 +26,11 @@ export const GuestApi = () => {
   return (
     <div className="container-fluid product-container">
       {products.map((product) => {
-        const productImageName =
-          product.productName.replace(/%20/g, '') + '.jpg';
-        const matchesImage = gallery.find(
-          (image) => image.imageName === productImageName
-        );
         return (
           <div key={product.id} className="card" style={{ width: '15rem' }}>
             <img
               className="card-img-top"
-              src={matchesImage.p}
+              src={getImage(product.productName)}
               alt="Card image cap"
             />
             <div className="card-body">
