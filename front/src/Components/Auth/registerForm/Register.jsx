@@ -8,6 +8,11 @@ const RegisterForm = () => {
         <h1>Register</h1>
 
         <div className="input-box">
+          <input type="text" placeholder="adres email" required />
+          <FaUserAlt className="icon" />
+        </div>
+
+        <div className="input-box">
           <input type="text" placeholder="Username" required />
           <FaUserAlt className="icon" />
         </div>

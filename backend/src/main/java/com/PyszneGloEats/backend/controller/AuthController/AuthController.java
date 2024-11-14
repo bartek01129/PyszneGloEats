@@ -1,16 +1,16 @@
 package com.PyszneGloEats.backend.controller.AuthController;
 
-import com.PyszneGloEats.backend.dto.UserRegister;
 import com.PyszneGloEats.backend.dto.authDTO.AuthDto;
 import com.PyszneGloEats.backend.dto.authDTO.LoginDto;
+import com.PyszneGloEats.backend.dto.authDTO.RegisterDto;
+import com.PyszneGloEats.backend.dto.mail.EmailDTO;
 import com.PyszneGloEats.backend.model.User;
 import com.PyszneGloEats.backend.service.authServices.RegisterService;
+import com.PyszneGloEats.backend.service.authServices.passwordRestart.PasswordRestartTokenService;
+import com.PyszneGloEats.backend.service.email.EmailSenderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -20,16 +20,18 @@ import java.util.Optional;
 public class AuthController {
 
     private final RegisterService registerService;
+    private final EmailSenderService emailSenderService;
+
     
     @PostMapping("/register")
-    public User registerUser(@RequestBody UserRegister userRegister) {
-        return registerService.userRegister(userRegister);
+    public User registerUser(@RequestBody RegisterDto registerDto) {
+        return registerService.userRegister(registerDto);
     }
 
 
     @PostMapping("/login")
     public ResponseEntity<AuthDto> userLogin(@RequestBody LoginDto loginDto) {
-        Optional<String> token = registerService.userLogin(loginDto.getUsername(),loginDto.getPassword());
+        Optional<String> token = registerService.userLogin(loginDto);
 
         if(token.isPresent()) {
             return ResponseEntity.ok(new AuthDto(token.get(),"Login Successfully!"));
@@ -38,6 +40,13 @@ public class AuthController {
         }
 
     }
+
+    @PostMapping("/mail")
+    public void sendEmail(@RequestBody EmailDTO emailDTO) {
+        emailSenderService.sendEmail(emailDTO);
+    }
+
+
 
 
 }

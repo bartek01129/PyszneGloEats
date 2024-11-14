@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const data = await login(username, password);
+      const data = await login(email, password);
       localStorage.setItem('token', data.token);
       console.log(data.message);
       const token = localStorage.getItem('token');
@@ -44,8 +44,8 @@ const LoginForm = () => {
           <div className="input-box">
             <input
               type="text"
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Username"
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="adres Email"
               required
             />
             <FaUserAlt className="icon" />
@@ -60,7 +60,9 @@ const LoginForm = () => {
             <FaUnlock className="icon" />
           </div>
           <div className="forgot-password">
-            <a href="#">Forgot password?</a>
+            <a href="#">
+              <Link to="/auth/emailRestart">Forgot password?</Link>
+            </a>
           </div>
 
           <button type="submit" onClick={loginSubmit}>

@@ -1,6 +1,5 @@
 package com.PyszneGloEats.backend.service;
 
-import com.PyszneGloEats.backend.dto.UserRegister;
 import com.PyszneGloEats.backend.model.User;
 import com.PyszneGloEats.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

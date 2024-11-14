@@ -1,6 +1,7 @@
 package com.PyszneGloEats.backend.service.authServices;
 
-import com.PyszneGloEats.backend.dto.UserRegister;
+import com.PyszneGloEats.backend.dto.authDTO.LoginDto;
+import com.PyszneGloEats.backend.dto.authDTO.RegisterDto;
 import com.PyszneGloEats.backend.model.User;
 import com.PyszneGloEats.backend.repository.UserRepository;
 import com.PyszneGloEats.backend.service.authServices.security.JwtTokenProvider;
@@ -19,13 +20,13 @@ public class RegisterService {
     private final JwtTokenProvider jwtTokenProvider;
 
 
-    public Optional<String> userLogin(String username, String password){
-        Optional<User> user = userRepository.findByName(username);
+    public Optional<String> userLogin(LoginDto loginDto){
+        Optional<User> user = userRepository.findByEmail(loginDto.getEmail());
 
-        if(user.isPresent() && passwordEncoder.matches(password, user.get().getPassword() )) {
+        if(user.isPresent() && passwordEncoder.matches(loginDto.getPassword(), user.get().getPassword() )) {
             String role = user.get().getRole().name();
 
-            String token = jwtTokenProvider.generateToken(username, role);
+            String token = jwtTokenProvider.generateToken(loginDto.getPassword(), role);
 
             return Optional.of(token);
 
@@ -37,9 +38,9 @@ public class RegisterService {
 
 
 
-    public User userRegister(UserRegister userRegister) {
-        String password = passwordEncoder.encode(userRegister.getPassword());
-        User user = new User(userRegister.getName(), password, User.Role.ROLE_GUEST);
+    public User userRegister(RegisterDto registerDto) {
+        String password = passwordEncoder.encode(registerDto.getPassword());
+        User user = new User(registerDto.getEmail(),registerDto.getName(), password, User.Role.ROLE_GUEST);
         return userRepository.save(user);
     }
 }

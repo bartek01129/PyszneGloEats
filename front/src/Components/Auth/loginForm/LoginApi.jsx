@@ -1,13 +1,13 @@
 const API_URL = 'http://localhost:8080/auth/login';
 
-export const login = async (username, password) => {
+export const login = async (email, password) => {
   try {
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ email, password }),
     });
 
     if (response.ok) {

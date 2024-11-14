@@ -1,5 +1,6 @@
 package com.PyszneGloEats.backend.service.email;
 
+import com.PyszneGloEats.backend.dto.mail.EmailDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -14,12 +15,12 @@ public class EmailSenderService {
 
     private final JavaMailSender mailSender;
 
-    public void sendEmail(String toEmail, String subject, String body) {
+    public void sendEmail(EmailDTO emailDTO) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom("turborower@serwer2492574.home.pl");
-        simpleMailMessage.setTo(toEmail);
-        simpleMailMessage.setText(body);
-        simpleMailMessage.setSubject(subject);
+        simpleMailMessage.setTo(emailDTO.getToEmail());
+        simpleMailMessage.setText(emailDTO.getBody());
+        simpleMailMessage.setSubject(emailDTO.getSubject());
         mailSender.send(simpleMailMessage);
         System.out.println("Mail send successfully...");
     }

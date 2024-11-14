@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Entity
 @Getter@Setter@ToString
 @NoArgsConstructor
@@ -15,12 +18,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String email;
     private String name;
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role = Role.ROLE_GUEST;
+    private String passwordResetToken;
+    private LocalDateTime expiryDate;
 
-    public User(String name, String password, Role role) {
+    public User(String email,String name, String password, Role role) {
+        this.email = email;
         this.name = name;
         this.password = password;
         this.role = role;

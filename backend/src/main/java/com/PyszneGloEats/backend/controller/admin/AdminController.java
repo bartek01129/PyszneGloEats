@@ -27,9 +27,5 @@ public class AdminController {
         return adminService.setUsersRole(id, role);
     }
 
-    @PostMapping("/mail/{toEmail}/{subject}/{body}")
-    public void sendEmail(@PathVariable String toEmail, @PathVariable String subject, @PathVariable String body) {
-        emailSenderService.sendEmail(toEmail,subject,body);
-    }
 
 }
