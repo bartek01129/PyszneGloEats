@@ -6,7 +6,6 @@ import com.PyszneGloEats.backend.dto.authDTO.RegisterDto;
 import com.PyszneGloEats.backend.dto.mail.EmailDTO;
 import com.PyszneGloEats.backend.model.User;
 import com.PyszneGloEats.backend.service.authServices.RegisterService;
-import com.PyszneGloEats.backend.service.authServices.passwordRestart.PasswordRestartTokenService;
 import com.PyszneGloEats.backend.service.email.EmailSenderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

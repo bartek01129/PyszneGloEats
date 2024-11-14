@@ -26,7 +26,7 @@ public class RegisterService {
         if(user.isPresent() && passwordEncoder.matches(loginDto.getPassword(), user.get().getPassword() )) {
             String role = user.get().getRole().name();
 
-            String token = jwtTokenProvider.generateToken(loginDto.getPassword(), role);
+            String token = jwtTokenProvider.generateToken(user.get().getName(), role);
 
             return Optional.of(token);
 

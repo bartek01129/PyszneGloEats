@@ -1,4 +1,4 @@
-export const EmailRestartApi = async (email) => {
+export const EmailRestartApi = async (email, navigate) => {
   const API_URL = `http://localhost:8080/auth/restartPasswordMail?email=${email}`;
 
   try {
@@ -13,6 +13,7 @@ export const EmailRestartApi = async (email) => {
     if (response.ok) {
       const data = await response.json();
       console.log(data);
+      navigate(`/auth/restartPassword`);
       return data;
     } else {
       throw new Error('Failed to send message');

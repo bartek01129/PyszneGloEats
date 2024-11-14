@@ -9,13 +9,12 @@ import com.PyszneGloEats.backend.service.email.EmailSenderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class PasswordRestartTokenService {
+public class PasswordTokenService {
 
 
     private final UserRepository userRepository;

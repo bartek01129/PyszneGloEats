@@ -1,14 +1,15 @@
-// const API_URL = 'http://localhost:8080/auth/restartPasswordMail?email=';
 import { useState } from 'react';
 import './EmailRestart.css';
 import { EmailRestartApi } from './EmailRestartApi';
+import { useNavigate } from 'react-router-dom';
 
 const EmailRestart = () => {
   const [email, setEmail] = useState('');
-
+  const navigate = useNavigate();
   const handleSendEmail = async (e) => {
     e.preventDefault();
-    await EmailRestartApi(email);
+
+    await EmailRestartApi(email, navigate);
   };
 
   return (

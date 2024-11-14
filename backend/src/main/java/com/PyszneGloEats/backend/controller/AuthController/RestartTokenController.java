@@ -1,7 +1,7 @@
 package com.PyszneGloEats.backend.controller.AuthController;
 
 import com.PyszneGloEats.backend.dto.authDTO.PasswordTokenResponseDTO;
-import com.PyszneGloEats.backend.service.authServices.passwordRestart.PasswordRestartTokenService;
+import com.PyszneGloEats.backend.service.authServices.passwordRestart.PasswordTokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 
-public class RestartPasswordMailController {
+public class RestartTokenController {
 
-    private final PasswordRestartTokenService passwordRestartTokenService;
+    private final PasswordTokenService passwordRestartTokenService;
 
     @PostMapping("/restartPasswordMail")
     public PasswordTokenResponseDTO restartPasswordMail(@RequestParam String email) {

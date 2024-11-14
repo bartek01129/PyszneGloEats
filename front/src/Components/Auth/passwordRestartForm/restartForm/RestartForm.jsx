@@ -1,16 +1,28 @@
 import { useState } from 'react';
 import { FaUserAlt, FaUnlock } from 'react-icons/fa';
 import './RestartForm.css';
+import { useNavigate } from 'react-router-dom';
+import { RestartFormApi } from './RestartFormApi';
 
 const RestartForm = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [token, setToken] = useState('');
+  const navigate = useNavigate();
+
+  const handleRestartPassword = async (e) => {
+    e.preventDefault();
+    if (password === confirmPassword) {
+      await RestartFormApi(token, confirmPassword, navigate);
+    } else {
+      alert('Hasła nie zgadzają się');
+    }
+  };
 
   return (
     <div className="restartFormBody">
       <div className="restartFormWrapper">
-        <form action="">
+        <form action="" onSubmit={handleRestartPassword}>
           <h1>Zresetuj swoje hasło</h1>
 
           <div className="input-box">
@@ -42,8 +54,9 @@ const RestartForm = () => {
             />
             <FaUnlock className="icon" />
           </div>
-
-          <button type="submit">Zarejestruj się</button>
+          <button type="submit" className="btn btn-secondary">
+            Zresetuj haslo
+          </button>
         </form>
       </div>
     </div>
