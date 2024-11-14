@@ -2,7 +2,8 @@ import { Route, Routes } from 'react-router-dom';
 import LoginForm from '../Auth/loginForm/LoginForm';
 import RegisterForm from '../Auth/registerForm/Register';
 import Page403 from '../Auth/403Page/Page403';
-import EmailRestart from '../Auth/passwordRestartForm/emailRestart';
+import EmailRestart from '../Auth/passwordRestartForm/emailRestart/EmailRestart';
+import RestartForm from '../Auth/passwordRestartForm/restartForm/RestartForm';
 
 function AuthRouter() {
   return (
@@ -11,6 +12,7 @@ function AuthRouter() {
       <Route path="/auth/register" element={<RegisterForm />} />
       <Route path="/auth/page403" element={<Page403 />} />
       <Route path="/auth/emailRestart" element={<EmailRestart />} />
+      <Route path="/auth/restartPassword" element={<RestartForm />} />
     </Routes>
   );
 }
