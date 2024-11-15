@@ -1,5 +1,6 @@
 package com.PyszneGloEats.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,36 +9,29 @@ import lombok.ToString;
 
 import java.util.List;
 
-
 @Entity
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "user")
 @NoArgsConstructor
-@Table(name = "orders")
-public class Order {
+@Table(name = "carts")
+public class Cart {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
+    @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "order_items")
+    @ManyToMany
+    @JoinTable(
+            name = "cart_items"
+    )
     private List<MenuItem> menuItems;
-
-    @Enumerated(EnumType.STRING)
-    private Status status;
-
-    private int quantity;
-
-
-    public enum Status {
-        PLACED, IN_PROGRESS, COMPLETED, CANCELLED, PICKED_UP
-    }
 
 
 }

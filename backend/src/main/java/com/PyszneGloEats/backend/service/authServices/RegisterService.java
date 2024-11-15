@@ -2,7 +2,9 @@ package com.PyszneGloEats.backend.service.authServices;
 
 import com.PyszneGloEats.backend.dto.authDTO.LoginDto;
 import com.PyszneGloEats.backend.dto.authDTO.RegisterDto;
+import com.PyszneGloEats.backend.model.Cart;
 import com.PyszneGloEats.backend.model.User;
+import com.PyszneGloEats.backend.repository.CartRepository;
 import com.PyszneGloEats.backend.repository.UserRepository;
 import com.PyszneGloEats.backend.service.authServices.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ public class RegisterService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
+    private final CartRepository cartRepository;
 
 
     public Optional<String> userLogin(LoginDto loginDto){
@@ -41,6 +44,14 @@ public class RegisterService {
     public User userRegister(RegisterDto registerDto) {
         String password = passwordEncoder.encode(registerDto.getPassword());
         User user = new User(registerDto.getEmail(),registerDto.getName(), password, User.Role.ROLE_GUEST);
-        return userRepository.save(user);
+
+        User savedUser = userRepository.save(user);
+
+        Cart cart = new Cart();
+        cart.setUser(user);
+        cartRepository.save(cart);
+        user.setCart(cart);
+
+        return savedUser;
     }
 }

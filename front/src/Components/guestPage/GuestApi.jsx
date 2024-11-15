@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './GuestPage.css';
+import { AddToCartApi } from './cart/cartService/AddToCartApi';
 
 const API_URL = 'http://localhost:8080/guest/getAll';
 
@@ -7,11 +8,15 @@ export const GuestApi = () => {
   const token = localStorage.getItem('token');
   const [products, setProducts] = useState([]);
 
+  const handleAddToCart = async (value) => {
+    await AddToCartApi(value);
+    console.log(`Added ${value} to cart`);
+  };
+
   function getImage(imgName) {
     return new URL(`../../assets/products/${imgName}.jpg`, import.meta.url)
       .href;
   }
-
   useEffect(() => {
     fetch(API_URL, {
       method: 'GET',
@@ -37,7 +42,14 @@ export const GuestApi = () => {
               <h5 className="card-title">{product.productName}</h5>
               <p className="card-text">{product.description}</p>
               <p className="card-text">{product.price}</p>
-              <a href="#" className="btn btn-primary">
+              <a
+                href="#"
+                className="btn btn-primary"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleAddToCart(product.productName);
+                }}
+              >
                 Dodaj do koszyka
               </a>
             </div>

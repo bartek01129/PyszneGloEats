@@ -9,9 +9,10 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Getter@Setter@ToString
+@Getter@Setter@ToString(exclude = "cart")
 @NoArgsConstructor
 @Table(name = "users",uniqueConstraints = @UniqueConstraint(columnNames = {"name", "email"}))
 public class User {
@@ -32,6 +33,12 @@ public class User {
         this.password = password;
         this.role = role;
     }
+
+    @OneToOne(mappedBy = "user")
+    private Cart cart;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Order> orders;
 
     public enum Role {
         ROLE_GUEST,

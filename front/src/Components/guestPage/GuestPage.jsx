@@ -1,5 +1,8 @@
 import { GuestApi } from './guestApi';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import { Link } from 'react-router-dom';
+
 const GuestPage = () => {
   return (
     <div className="guestBody">
@@ -28,6 +31,13 @@ const GuestPage = () => {
             <li className="nav-item">
               <a className="nav-link" href="#">
                 Koszyk
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                <Link to="/guest/cart">
+                  <i className="bi bi-cart-fill"></i>
+                </Link>
               </a>
             </li>
           </ul>

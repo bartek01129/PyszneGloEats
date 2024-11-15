@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import './LoginForm.css';
-import { FaUserAlt } from 'react-icons/fa';
-import { FaUnlock } from 'react-icons/fa';
+import { FaUserAlt, FaUnlock } from 'react-icons/fa';
+
 import { login } from './LoginApi';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
