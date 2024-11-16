@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import './GuestPage.css';
 import { AddToCartApi } from './cart/cartService/AddToCartApi';
 
-const API_URL = 'http://localhost:8080/guest/getAll';
-
 export const GuestApi = () => {
-  const token = localStorage.getItem('token');
+  const tokenStorage = localStorage.getItem('token');
+  const tokenPayload = tokenStorage.split('.')[1];
+  const decodedPayload = JSON.parse(atob(tokenPayload));
+  const username = decodedPayload.sub;
+
   const [products, setProducts] = useState([]);
 
   const handleAddToCart = async (value) => {
@@ -17,17 +19,20 @@ export const GuestApi = () => {
     return new URL(`../../assets/products/${imgName}.jpg`, import.meta.url)
       .href;
   }
+
+  const API_URL = `http://localhost:8080/guest/getUsersMenuItems/${username}`;
+
   useEffect(() => {
     fetch(API_URL, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${tokenStorage}`,
       },
     })
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error(error));
-  }, [token]);
+  }, [tokenStorage, API_URL]);
   return (
     <div className="container-fluid product-container">
       {products.map((product) => {
@@ -42,6 +47,15 @@ export const GuestApi = () => {
               <h5 className="card-title">{product.productName}</h5>
               <p className="card-text">{product.description}</p>
               <p className="card-text">{product.price}</p>
+              <div className="quantity">
+                <button href="#" className="btnQ">
+                  -
+                </button>
+                <p className="cardQ">{product.quantity}</p>
+                <button href="#" className="btnQ">
+                  +
+                </button>
+              </div>
               <a
                 href="#"
                 className="btn btn-primary"

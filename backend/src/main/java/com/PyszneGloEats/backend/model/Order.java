@@ -32,7 +32,7 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    private int quantity;
+
 
 
     public enum Status {

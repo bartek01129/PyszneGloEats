@@ -35,4 +35,25 @@ public class GuestController {
         return cartService.getCart(name);
     }
 
+
+    @PutMapping("/deleteFromCart")
+    public Cart deleteFromCart(@RequestBody DropToCartDTO dropToCartDTO) {
+        return cartService.deleteItem(dropToCartDTO);
+    }
+
+    @PutMapping("/incrementItem/{name}")
+    public MenuItem incrementItem(@PathVariable String name) {
+        return menuItemService.incrementMenuItem(name);
+    }
+
+    @PutMapping("/decrementItem/{name}")
+    public MenuItem decrementItem(@PathVariable String name) {
+        return menuItemService.decrementMenuItem(name);
+    }
+
+    @GetMapping("/getUsersMenuItems/{name}")
+    public List<MenuItem> getUsersItems(@PathVariable String name) {
+        return menuItemService.getUsersMenu(name);
+    }
+
 }

@@ -28,9 +28,7 @@ public class Cart {
     private User user;
 
     @ManyToMany
-    @JoinTable(
-            name = "cart_items"
-    )
+    @JoinTable(name = "cart_items")
     private List<MenuItem> menuItems;
 
 

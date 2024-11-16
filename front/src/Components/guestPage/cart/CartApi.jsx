@@ -35,6 +35,7 @@ export const CartApi = () => {
           <th>nazwa produktu</th>
           <th>opis</th>
           <th>cena</th>
+          <th>ilość</th>
           <th></th>
         </thead>
         <tbody>
@@ -50,6 +51,17 @@ export const CartApi = () => {
                 <td>{item.productName}</td>
                 <td>{item.description}</td>
                 <td>{item.price} zł</td>
+                <td>
+                  <div className="quantity">
+                    <button href="#" className="btnQ">
+                      -
+                    </button>
+                    <p className="cardQ">{item.quantity}</p>
+                    <button href="#" className="btnQ">
+                      +
+                    </button>
+                  </div>
+                </td>
                 <td>
                   <i className="bi bi-trash"></i>
                 </td>

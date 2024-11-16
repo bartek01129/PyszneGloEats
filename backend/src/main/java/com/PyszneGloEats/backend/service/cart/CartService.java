@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,10 +34,36 @@ public class CartService {
         Cart cart = user.getCart();
         MenuItem menuItem = menuItemRepository.findByProductName(dropToCartDTO.getProductName()).orElseThrow();
         List<MenuItem> menuItems = cart.getMenuItems();
-        menuItems.add(menuItem);
+        Optional<MenuItem> existingItem = menuItems.stream().filter(item -> item.getProductName().equals(menuItem.getProductName())).findFirst();
+
+        if(menuItem.getQuantity() > 0) {
+            if(existingItem.isPresent()) {
+                MenuItem item = existingItem.get();
+                item.setQuantity(item.getQuantity() + menuItem.getQuantity());
+            } else {
+                menuItems.add(menuItem);
+            }
+        } else  {
+            System.out.println("produkt musi być większy do 0");
+        }
+
+
         cart.setMenuItems(menuItems);
         userRepository.save(user);
+
         return new DropToCartDTO(user.getName(),menuItem.getProductName());
+    }
+
+
+
+    public Cart deleteItem(DropToCartDTO dropToCartDTO) {
+        User user = userRepository.findByName(dropToCartDTO.getUsername()).orElseThrow();
+        Cart cart = user.getCart();
+        List<MenuItem> menuItems = cart.getMenuItems();
+        menuItems.removeIf(menuItem -> menuItem.getProductName().equals(dropToCartDTO.getProductName()));
+        cart.setMenuItems(menuItems);
+        userRepository.save(user);
+        return cart;
     }
 
 

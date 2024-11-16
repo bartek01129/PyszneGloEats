@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Getter@Setter@ToString(exclude = "cart")
+@Getter@Setter@ToString(exclude = {"cart", "menuItems"})
 @NoArgsConstructor
 @Table(name = "users",uniqueConstraints = @UniqueConstraint(columnNames = {"name", "email"}))
 public class User {
@@ -39,6 +39,10 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Order> orders;
+
+    @ManyToMany
+    @JoinTable(name = "users_menu_items")
+    private List<MenuItem> menuItems;
 
     public enum Role {
         ROLE_GUEST,
