@@ -2,6 +2,7 @@ package com.PyszneGloEats.backend.service.cart;
 
 import com.PyszneGloEats.backend.dto.cart.CartItemDTO;
 import com.PyszneGloEats.backend.dto.menuItem.DropToCartDTO;
+import com.PyszneGloEats.backend.dto.menuItem.UserMenuDTO;
 import com.PyszneGloEats.backend.model.Cart;
 import com.PyszneGloEats.backend.model.CartItem;
 import com.PyszneGloEats.backend.model.MenuItem;
@@ -47,7 +48,7 @@ public class CartService {
             cartRepository.save(cart);
         }
 
-        MenuItem menuItem = menuItemRepository.findByProductName(dropToCartDTO.getProductName()).orElseThrow(() -> new NoSuchElementException("Menu item not found"));
+        MenuItem menuItem = menuItemRepository.findByProductName(dropToCartDTO.getProductName()).orElseThrow();
         if (dropToCartDTO.getQuantity() <= 0) {
             throw new IllegalArgumentException("Produkt musi mieć ilość większą niż 0");
         }
@@ -85,6 +86,31 @@ public class CartService {
         }
         userRepository.save(user);
         return new CartItemDTO(user.getName(), cartItem.getMenuItem().getProductName(), cartItem.getMenuItem().getDescription(), cartItem.getMenuItem().getPrice(), cartItem.getQuantity());
+    }
+
+
+    public List<CartItemDTO> removeItemFormCart(UserMenuDTO userMenuDTO) {
+        User user = userRepository.findByName(userMenuDTO.getUsername()).orElseThrow();
+        Cart cart = user.getCart();
+
+        Optional<CartItem> cartItemToRemove = cart.getCartItems().stream()
+                .filter(cartItem -> cartItem.getMenuItem().getProductName().equals(userMenuDTO.getProductName()))
+                .findFirst();
+
+        if (cartItemToRemove.isPresent()) {
+            cart.getCartItems().remove(cartItemToRemove.get());
+        } else {
+            throw new IllegalArgumentException("Item not found in cart");
+        }
+
+        cartRepository.save(cart);
+        userRepository.save(user);
+
+        List<CartItemDTO> cartItemsDTO = new ArrayList<>();
+        for (CartItem cartItem : cart.getCartItems()) {
+            cartItemsDTO.add(new CartItemDTO(userMenuDTO.getUsername(), cartItem.getMenuItem(), cartItem.getQuantity()));
+        }
+        return cartItemsDTO;
     }
 
 
