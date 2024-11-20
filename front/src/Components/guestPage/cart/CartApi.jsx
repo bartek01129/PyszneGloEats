@@ -1,4 +1,8 @@
 import { useEffect, useState } from 'react';
+import {
+  incrementQuantity,
+  decrementQuantity,
+} from './cartService/QuantityApi';
 
 export const CartApi = () => {
   const token = localStorage.getItem('token');
@@ -23,9 +27,31 @@ export const CartApi = () => {
       },
     })
       .then((response) => response.json())
-      .then((data) => setMenuItems(data.menuItems))
+      .then((data) => setMenuItems(data))
       .catch((error) => console.error(error));
   }, [token, API_URL]);
+
+  const handleIncrement = async (productName) => {
+    const updatedMenuItems = menuItems.map((item) =>
+      item.productName === productName
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
+    );
+    setMenuItems(updatedMenuItems);
+
+    await incrementQuantity(productName);
+  };
+
+  const handleDecrement = async (productName) => {
+    const updatedMenuItems = menuItems.map((item) =>
+      item.productName === productName
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
+    );
+    setMenuItems(updatedMenuItems);
+
+    await decrementQuantity(productName);
+  };
 
   return (
     <div className="container-fluid cartContainer">
@@ -53,17 +79,27 @@ export const CartApi = () => {
                 <td>{item.price} zł</td>
                 <td>
                   <div className="quantity">
-                    <button href="#" className="btnQ">
+                    <button
+                      href="#"
+                      className="btnQ"
+                      onClick={() => handleDecrement(item.productName)}
+                    >
                       -
                     </button>
                     <p className="cardQ">{item.quantity}</p>
-                    <button href="#" className="btnQ">
+                    <button
+                      href="#"
+                      className="btnQ"
+                      onClick={() => handleIncrement(item.productName)}
+                    >
                       +
                     </button>
                   </div>
                 </td>
                 <td>
-                  <i className="bi bi-trash"></i>
+                  <a href="">
+                    <i className="bi bi-trash"></i>
+                  </a>
                 </td>
               </tr>
             );

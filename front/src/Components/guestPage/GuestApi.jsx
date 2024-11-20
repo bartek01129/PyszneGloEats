@@ -10,8 +10,8 @@ export const GuestApi = () => {
 
   const [products, setProducts] = useState([]);
 
-  const handleAddToCart = async (value) => {
-    await AddToCartApi(value);
+  const handleAddToCart = async (value, quantity) => {
+    await AddToCartApi(value, quantity);
     console.log(`Added ${value} to cart`);
   };
 
@@ -19,6 +19,28 @@ export const GuestApi = () => {
     return new URL(`../../assets/products/${imgName}.jpg`, import.meta.url)
       .href;
   }
+  const incrementQuantity = (name) => {
+    setProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product.productName === name
+          ? { ...product, quantity: (product.quantity || 1) + 1 }
+          : product
+      )
+    );
+  };
+
+  const decrementQuantity = (name) => {
+    setProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product.productName === name
+          ? {
+              ...product,
+              quantity: product.quantity > 1 ? product.quantity - 1 : 1,
+            }
+          : product
+      )
+    );
+  };
 
   const API_URL = `http://localhost:8080/guest/getUsersMenuItems/${username}`;
 
@@ -30,7 +52,14 @@ export const GuestApi = () => {
       },
     })
       .then((res) => res.json())
-      .then((data) => setProducts(data))
+      .then((data) =>
+        setProducts(
+          data.map((product) => ({
+            ...product,
+            quantity: 1,
+          }))
+        )
+      )
       .catch((error) => console.error(error));
   }, [tokenStorage, API_URL]);
   return (
@@ -48,11 +77,19 @@ export const GuestApi = () => {
               <p className="card-text">{product.description}</p>
               <p className="card-text">{product.price}</p>
               <div className="quantity">
-                <button href="#" className="btnQ">
+                <button
+                  href="#"
+                  className="btnQ"
+                  onClick={() => decrementQuantity(product.productName)}
+                >
                   -
                 </button>
                 <p className="cardQ">{product.quantity}</p>
-                <button href="#" className="btnQ">
+                <button
+                  href="#"
+                  className="btnQ"
+                  onClick={() => incrementQuantity(product.productName)}
+                >
                   +
                 </button>
               </div>
@@ -61,7 +98,7 @@ export const GuestApi = () => {
                 className="btn btn-primary"
                 onClick={(e) => {
                   e.preventDefault();
-                  handleAddToCart(product.productName);
+                  handleAddToCart(product.productName, product.quantity);
                 }}
               >
                 Dodaj do koszyka

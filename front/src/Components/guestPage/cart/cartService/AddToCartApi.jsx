@@ -1,10 +1,10 @@
-export const AddToCartApi = async (productName) => {
+export const AddToCartApi = async (productName, quantity) => {
   const tokenStorage = localStorage.getItem('token');
   const tokenPayload = tokenStorage.split('.')[1];
   const decodedPayload = JSON.parse(atob(tokenPayload));
   const username = decodedPayload.sub;
 
-  const API_URL = 'http://localhost:8080/guest/addProducts';
+  const API_URL = 'http://localhost:8080/guest/addProductsToCart';
   try {
     const respone = await fetch(API_URL, {
       method: 'PUT',
@@ -12,7 +12,7 @@ export const AddToCartApi = async (productName) => {
         Authorization: `Bearer ${tokenStorage}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ productName, username }),
+      body: JSON.stringify({ productName, username, quantity }),
     });
 
     if (respone.ok) {
