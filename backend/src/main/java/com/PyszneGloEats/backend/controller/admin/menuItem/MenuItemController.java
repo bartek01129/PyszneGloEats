@@ -2,6 +2,7 @@ package com.PyszneGloEats.backend.controller.admin.menuItem;
 
 import com.PyszneGloEats.backend.dto.menuItem.DropToCartDTO;
 import com.PyszneGloEats.backend.dto.menuItem.MenuItemDTO;
+import com.PyszneGloEats.backend.dto.menuItem.UserMenuDTO;
 import com.PyszneGloEats.backend.model.MenuItem;
 import com.PyszneGloEats.backend.model.User;
 import com.PyszneGloEats.backend.service.menuItme.MenuItemService;
@@ -24,9 +25,12 @@ public class MenuItemController {
 
 
     @PostMapping("/setToUser")
-    public User addItemToUser(DropToCartDTO dropToCartDTO) {
-        return menuItemService.addItemToUser(dropToCartDTO);
+    public User addItemToUser(UserMenuDTO userMenuDTO) {
+        return menuItemService.addItemToUser(userMenuDTO);
     }
+
+
+
 
 
 }

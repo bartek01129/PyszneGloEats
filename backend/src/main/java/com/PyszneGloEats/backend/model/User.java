@@ -1,6 +1,9 @@
 package com.PyszneGloEats.backend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +15,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Getter@Setter@ToString(exclude = {"cart", "menuItems"})
+@Getter
+@Setter
 @NoArgsConstructor
 @Table(name = "users",uniqueConstraints = @UniqueConstraint(columnNames = {"name", "email"}))
 public class User {
@@ -34,14 +38,14 @@ public class User {
         this.role = role;
     }
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Cart cart;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Order> orders;
 
     @ManyToMany
-    @JoinTable(name = "users_menu_items")
+    @JoinTable(name = "users_menu")
     private List<MenuItem> menuItems;
 
     public enum Role {

@@ -18,12 +18,10 @@ public class MenuItem {
     private String productName;
     private String description;
     private Double price;
-    private int quantity;
 
-    public MenuItem(String productName, String description, Double price, int quantity) {
+    public MenuItem(String productName, String description, Double price) {
         this.productName = productName;
         this.description = description;
         this.price = price;
-        this.quantity = 1;
     }
 }

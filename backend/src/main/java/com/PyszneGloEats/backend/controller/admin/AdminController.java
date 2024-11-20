@@ -22,6 +22,7 @@ public class AdminController {
     public List<User> getUsers() {
         return adminService.getUsers();
     }
+
     @PutMapping("/update/{id}/{role}")
     public User setUsersRole(@PathVariable Long id, @PathVariable String role) {
         return adminService.setUsersRole(id, role);

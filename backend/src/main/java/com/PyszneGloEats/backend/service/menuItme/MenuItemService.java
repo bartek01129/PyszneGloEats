@@ -2,6 +2,7 @@ package com.PyszneGloEats.backend.service.menuItme;
 
 import com.PyszneGloEats.backend.dto.menuItem.DropToCartDTO;
 import com.PyszneGloEats.backend.dto.menuItem.MenuItemDTO;
+import com.PyszneGloEats.backend.dto.menuItem.UserMenuDTO;
 import com.PyszneGloEats.backend.model.Cart;
 import com.PyszneGloEats.backend.model.MenuItem;
 import com.PyszneGloEats.backend.model.User;
@@ -22,7 +23,7 @@ public class MenuItemService {
 
 
     public MenuItem setMenuItem(MenuItemDTO menuItemDTO) {
-        MenuItem menuItem = new MenuItem(menuItemDTO.getProductName(),menuItemDTO.getDescription(),menuItemDTO.getPrice(),menuItemDTO.getQuantity());
+        MenuItem menuItem = new MenuItem(menuItemDTO.getProductName(),menuItemDTO.getDescription(),menuItemDTO.getPrice());
         menuItemRepository.save(menuItem);
         return menuItem;
     }
@@ -38,26 +39,9 @@ public class MenuItemService {
     }
 
 
-    public MenuItem incrementMenuItem(String name) {
-        MenuItem menuItem = menuItemRepository.findByProductName(name).orElseThrow();
-        menuItem.setQuantity(menuItem.getQuantity() + 1);
-        menuItemRepository.save(menuItem);
-        return menuItem;
-    }
-
-
-    public MenuItem decrementMenuItem(String name) {
-        MenuItem menuItem = menuItemRepository.findByProductName(name).orElseThrow();
-        if (menuItem.getQuantity() > 0) {
-            menuItem.setQuantity(menuItem.getQuantity() - 1);
-        }
-        menuItemRepository.save(menuItem);
-        return menuItem;
-    }
-
-    public User addItemToUser(DropToCartDTO dropToCartDTO) {
-        User user = userRepository.findByName(dropToCartDTO.getUsername()).orElseThrow();
-        MenuItem menuItem = menuItemRepository.findByProductName(dropToCartDTO.getProductName()).orElseThrow();
+    public User addItemToUser(UserMenuDTO userMenuDTO) {
+        User user = userRepository.findByName(userMenuDTO.getUsername()).orElseThrow();
+        MenuItem menuItem = menuItemRepository.findByProductName(userMenuDTO.getProductName()).orElseThrow();
 
         List<MenuItem> userMenu = user.getMenuItems();
         userMenu.add(menuItem);

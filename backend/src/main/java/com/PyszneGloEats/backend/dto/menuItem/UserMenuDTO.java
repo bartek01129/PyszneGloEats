@@ -9,10 +9,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @AllArgsConstructor
-public class DropToCartDTO {
+public class UserMenuDTO {
 
-    private String productName;
     private String username;
-    private int quantity;
-
+    private String productName;
 }
