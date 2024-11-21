@@ -3,6 +3,7 @@ package com.PyszneGloEats.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -14,6 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+
 @Table(name = "cart_items")
 public class CartItem {
 
@@ -29,7 +31,7 @@ public class CartItem {
 
     @ManyToOne
     @JoinColumn(name = "menu_item_id")
-    @JsonManagedReference
+    @JsonIgnoreProperties("users")
     private MenuItem menuItem;
 
     @Column(nullable = false, columnDefinition = "INT DEFAULT 1")
@@ -37,7 +39,7 @@ public class CartItem {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
-    @JsonBackReference
+    @JsonIgnoreProperties({"cartItems", "user"})
     private Order order;
 
     public CartItem(Cart cart, MenuItem menuItem, int quantity) {

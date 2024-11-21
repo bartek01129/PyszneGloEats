@@ -124,19 +124,27 @@ public class CartService {
 
         Cart cart = user.getCart();
 
-
-        List<CartItem> cartItems = new ArrayList<>(cart.getCartItems());
+        List<CartItem> cartItems = new ArrayList<>();
+        for (CartItem originalItem : cart.getCartItems()) {
+            CartItem newItem = new CartItem();
+            newItem.setMenuItem(originalItem.getMenuItem());
+            newItem.setQuantity(originalItem.getQuantity());
+            newItem.setCart(null);
+            cartItems.add(newItem);
+        }
 
         Order order = new Order(cartItems, Order.Status.PLACED);
 
+        order.setUser(user);
 
-        for(CartItem item : cartItems) {
+        for (CartItem item : cartItems) {
             item.setOrder(order);
         }
 
 
-        orderRepository.save(order);
 
+
+        orderRepository.save(order);
 
         return order;
 

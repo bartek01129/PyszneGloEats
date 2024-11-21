@@ -3,6 +3,7 @@ package com.PyszneGloEats.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -39,10 +40,16 @@ public class User {
     }
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
     private Cart cart;
-    
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
+    private List<Order> orders;
+
     @ManyToMany
     @JoinTable(name = "users_menu")
+    @JsonIgnoreProperties("users")
     private List<MenuItem> menuItems;
 
     public enum Role {

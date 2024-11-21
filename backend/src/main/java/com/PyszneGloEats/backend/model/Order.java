@@ -1,5 +1,7 @@
 package com.PyszneGloEats.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,11 +25,16 @@ public class Order {
 
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"order", "cart"})
     private List<CartItem> cartItems = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties({"orders", "cart", "menuItems", "password","passwordResetToken", "expiryDate", "email", "role" })
+    private User user;
 
     public Order(List<CartItem> cartItems, Status status) {
         this.cartItems = cartItems;
