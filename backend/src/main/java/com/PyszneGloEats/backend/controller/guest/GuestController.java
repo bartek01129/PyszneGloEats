@@ -44,4 +44,9 @@ public class GuestController {
     public List<CartItemDTO> removeItemFromCart(@RequestBody UserMenuDTO userMenuDTO) {
         return cartService.removeItemFormCart(userMenuDTO);
     }
+
+    @GetMapping("/getQuantity/{name}/{productName}")
+    public int getQuantity(@PathVariable String name, @PathVariable String productName) {
+        return menuItemService.getQuantity(name, productName);
+    }
 }

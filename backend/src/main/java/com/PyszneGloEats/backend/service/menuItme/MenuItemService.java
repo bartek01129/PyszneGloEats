@@ -4,6 +4,7 @@ import com.PyszneGloEats.backend.dto.menuItem.DropToCartDTO;
 import com.PyszneGloEats.backend.dto.menuItem.MenuItemDTO;
 import com.PyszneGloEats.backend.dto.menuItem.UserMenuDTO;
 import com.PyszneGloEats.backend.model.Cart;
+import com.PyszneGloEats.backend.model.CartItem;
 import com.PyszneGloEats.backend.model.MenuItem;
 import com.PyszneGloEats.backend.model.User;
 import com.PyszneGloEats.backend.repository.MenuItemRepository;
@@ -48,6 +49,17 @@ public class MenuItemService {
 
         return userRepository.save(user);
 
+    }
+
+
+    public int getQuantity(String name, String productName) {
+        User user = userRepository.findByName(name).orElseThrow();
+
+        return user.getCart().getCartItems().stream()
+                .filter(item -> item.getMenuItem().getProductName().equals(productName))
+                .findFirst()
+                .map(CartItem::getQuantity)
+                .orElse(0);
     }
 
 

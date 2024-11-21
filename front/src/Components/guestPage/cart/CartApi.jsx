@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   incrementQuantity,
   decrementQuantity,
+  removeItemFromCart,
 } from './cartService/QuantityApi';
 
 export const CartApi = () => {
@@ -53,6 +54,14 @@ export const CartApi = () => {
     await decrementQuantity(productName);
   };
 
+  const removeItemFormCart = async (productName) => {
+    await removeItemFromCart(productName);
+    const updatedMenuItems = menuItems.filter(
+      (item) => item.productName !== productName
+    );
+    setMenuItems(updatedMenuItems);
+  };
+
   return (
     <div className="container-fluid cartContainer">
       <table>
@@ -97,9 +106,12 @@ export const CartApi = () => {
                   </div>
                 </td>
                 <td>
-                  <a href="">
+                  <button
+                    className="btnQ"
+                    onClick={() => removeItemFormCart(item.productName)}
+                  >
                     <i className="bi bi-trash"></i>
-                  </a>
+                  </button>
                 </td>
               </tr>
             );
