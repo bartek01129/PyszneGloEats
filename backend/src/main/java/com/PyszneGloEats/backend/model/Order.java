@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @Table(name = "orders")
 public class Order {
@@ -21,19 +21,18 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private User user;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "order_items")
-    private List<MenuItem> menuItems;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<CartItem> cartItems = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private Status status;
 
 
-
+    public Order(List<CartItem> cartItems, Status status) {
+        this.cartItems = cartItems;
+        this.status = status;
+    }
 
     public enum Status {
         PLACED, IN_PROGRESS, COMPLETED, CANCELLED, PICKED_UP

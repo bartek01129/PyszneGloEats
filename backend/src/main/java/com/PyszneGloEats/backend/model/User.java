@@ -40,10 +40,7 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Cart cart;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Order> orders;
-
+    
     @ManyToMany
     @JoinTable(name = "users_menu")
     private List<MenuItem> menuItems;

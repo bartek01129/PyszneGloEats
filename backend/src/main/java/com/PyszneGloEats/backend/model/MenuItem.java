@@ -18,6 +18,7 @@ public class MenuItem {
     private String productName;
     private String description;
     private Double price;
+//     private boolean available;
 
     public MenuItem(String productName, String description, Double price) {
         this.productName = productName;

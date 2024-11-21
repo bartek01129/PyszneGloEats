@@ -3,13 +3,8 @@ package com.PyszneGloEats.backend.service.cart;
 import com.PyszneGloEats.backend.dto.cart.CartItemDTO;
 import com.PyszneGloEats.backend.dto.menuItem.DropToCartDTO;
 import com.PyszneGloEats.backend.dto.menuItem.UserMenuDTO;
-import com.PyszneGloEats.backend.model.Cart;
-import com.PyszneGloEats.backend.model.CartItem;
-import com.PyszneGloEats.backend.model.MenuItem;
-import com.PyszneGloEats.backend.model.User;
-import com.PyszneGloEats.backend.repository.CartRepository;
-import com.PyszneGloEats.backend.repository.MenuItemRepository;
-import com.PyszneGloEats.backend.repository.UserRepository;
+import com.PyszneGloEats.backend.model.*;
+import com.PyszneGloEats.backend.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +20,8 @@ public class CartService {
     private final MenuItemRepository menuItemRepository;
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
+    private final OrderRepository orderRepository;
+    private final CartItemRepository cartItemRepository;
 
 
     public List<CartItemDTO> getCart(String name) {
@@ -57,7 +54,7 @@ public class CartService {
 
         if (existingItem.isPresent()) {
             CartItem item = existingItem.get();
-            item.setQuantity(dropToCartDTO.getQuantity());
+            item.setQuantity(item.getQuantity() + dropToCartDTO.getQuantity());
         } else {
             CartItem newItem = new CartItem(cart, menuItem, dropToCartDTO.getQuantity());
             cart.getCartItems().add(newItem);
@@ -111,6 +108,38 @@ public class CartService {
             cartItemsDTO.add(new CartItemDTO(userMenuDTO.getUsername(), cartItem.getMenuItem(), cartItem.getQuantity()));
         }
         return cartItemsDTO;
+    }
+
+    public List<CartItem> getItemsFormCart(String name) {
+        User user = userRepository.findByName(name).orElseThrow();
+        Cart cart = user.getCart();
+
+
+        return new ArrayList<>(cart.getCartItems());
+    }
+
+
+    public Order createOrder(String name) {
+        User user = userRepository.findByName(name).orElseThrow();
+
+        Cart cart = user.getCart();
+
+
+        List<CartItem> cartItems = new ArrayList<>(cart.getCartItems());
+
+        Order order = new Order(cartItems, Order.Status.PLACED);
+
+
+        for(CartItem item : cartItems) {
+            item.setOrder(order);
+        }
+
+
+        orderRepository.save(order);
+
+
+        return order;
+
     }
 
 

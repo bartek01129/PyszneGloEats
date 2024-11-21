@@ -1,8 +1,11 @@
 package com.PyszneGloEats.backend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,13 +24,21 @@ public class CartItem {
 
     @ManyToOne
     @JoinColumn(name = "cart_id")
+    @JsonIgnore
     private Cart cart;
 
     @ManyToOne
     @JoinColumn(name = "menu_item_id")
+    @JsonManagedReference
     private MenuItem menuItem;
 
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 1")
     private int quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    @JsonBackReference
+    private Order order;
 
     public CartItem(Cart cart, MenuItem menuItem, int quantity) {
         this.cart = cart;

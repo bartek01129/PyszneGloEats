@@ -41,47 +41,25 @@ export const GuestApi = () => {
     );
   };
 
+  const API_URL = `http://localhost:8080/guest/getUsersMenuItems/${username}`;
   useEffect(() => {
-    const fetchProductsWithQuantity = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:8080/guest/getUsersMenuItems/${username}`,
-          {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${tokenStorage}`,
-            },
-          }
-        );
-        const data = await response.json();
-
-        const productsWithQuantities = await Promise.all(
-          data.map(async (product) => {
-            const quantityResponse = await fetch(
-              `http://localhost:8080/guest/getQuantity/${username}/${product.productName}`,
-              {
-                method: 'GET',
-                headers: {
-                  Authorization: `Bearer ${tokenStorage}`,
-                },
-              }
-            );
-            const quantityData = await quantityResponse.json();
-            return {
-              ...product,
-              quantity: quantityData || 1,
-            };
-          })
-        );
-
-        setProducts(productsWithQuantities);
-      } catch (error) {
-        console.error('Error fetching products or quantities:', error);
-      }
-    };
-
-    fetchProductsWithQuantity();
-  }, [tokenStorage, username]);
+    fetch(API_URL, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${tokenStorage}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) =>
+        setProducts(
+          data.map((product) => ({
+            ...product,
+            quantity: 1,
+          }))
+        )
+      )
+      .catch((error) => console.error(error));
+  }, [tokenStorage, API_URL]);
 
   return (
     <div className="container-fluid product-container">

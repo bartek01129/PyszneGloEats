@@ -4,6 +4,7 @@ import com.PyszneGloEats.backend.dto.cart.CartItemDTO;
 import com.PyszneGloEats.backend.dto.menuItem.DropToCartDTO;
 import com.PyszneGloEats.backend.dto.menuItem.UserMenuDTO;
 import com.PyszneGloEats.backend.model.MenuItem;
+import com.PyszneGloEats.backend.model.Order;
 import com.PyszneGloEats.backend.service.cart.CartService;
 import com.PyszneGloEats.backend.service.menuItme.MenuItemService;
 import lombok.RequiredArgsConstructor;
@@ -48,5 +49,12 @@ public class GuestController {
     @GetMapping("/getQuantity/{name}/{productName}")
     public int getQuantity(@PathVariable String name, @PathVariable String productName) {
         return menuItemService.getQuantity(name, productName);
+    }
+    
+    
+    
+    @PostMapping("/createOrder/{name}")
+    public Order createOrder(@PathVariable String name) {
+        return cartService.createOrder(name);
     }
 }
