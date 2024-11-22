@@ -139,13 +139,18 @@ public class CartService {
 
         for (CartItem item : cartItems) {
             item.setOrder(order);
+
+        }
+        if(!cart.getCartItems().isEmpty()) {
+            orderRepository.save(order);
+        } else {
+            throw new IllegalArgumentException("Cart is empty");
         }
 
+        cart.getCartItems().removeAll(cart.getCartItems());
 
-
-
-        orderRepository.save(order);
-
+        cartRepository.save(cart);
+        System.out.println(cart.getCartItems().size() + " size");
         return order;
 
     }
