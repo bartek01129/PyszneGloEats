@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { FaUserAlt, FaUnlock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { MdAlternateEmail } from "react-icons/md";
+import { FaLock } from "react-icons/fa";
 import './Register.css';
 import { Register } from './RegisterApi';
 
@@ -35,22 +37,23 @@ const RegisterForm = () => {
     <div className="registerFormBody">
       <div className="registerFormWrapper">
         <form action="">
-          <h1>Zarejestruj się</h1>
+          <h1>Załóż konto </h1>
 
           <div className="input-box">
             <input
               type="text"
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="email"
+              placeholder="E-mail (wymagane)"
               required
             />
-            <FaUserAlt className="icon" />
+            <MdAlternateEmail className='icon' />
+
           </div>
           <div className="input-box">
             <input
               type="text"
               onChange={(e) => setName(e.target.value)}
-              placeholder="name"
+              placeholder="Imię (wymagane)"
               required
             />
             <FaUserAlt className="icon" />
@@ -60,29 +63,31 @@ const RegisterForm = () => {
             <input
               type="password"
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
+              placeholder="Hasło (wymagane)"
               required
             />
             <FaUnlock className="icon" />
+            <FaLock  className='icon'/>
           </div>
 
           <div className="input-box">
             <input
               type="password"
               onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Repeat Password"
+              placeholder="Powtórz hasło (wymagane)"
               required
             />
             <FaUnlock className="icon" />
           </div>
           <button
             type="submit"
-            className="btn btn-secondary"
+            className="btn btn-secondary submitButton"
             onClick={(e) => handleRegisier(e)}
           >
             Zarejestruj się
           </button>
         </form>
+        
       </div>
     </div>
   );

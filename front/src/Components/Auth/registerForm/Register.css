@@ -10,15 +10,14 @@
   align-items: center;
   min-height: 100vh;
   min-width: 100vw;
-  background-size: cover;
-  background-position: center;
+  background-image: linear-gradient(to right bottom, #182121, #192522, #1b2822, #202b21, #272e1f, #2e2d1b, #362c1a, #3d2a1b, #42251f, #442128, #402033, #34223e);  background-repeat:no-repeat;
 }
 
 .registerFormWrapper {
-  width: 420px;
-  background-color: #201d1d;
+  width: 440px;
+  background-color: rgba(56, 46, 46, 0.6);
   border: 2px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(30px);
   color: #ffffff;
   border-radius: 10px;
@@ -28,6 +27,11 @@
 .registerFormWrapper h1 {
   font-size: 36px;
   text-align: center;
+}
+
+.registerFormWrapper .submitButton {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+
 }
 
 .registerFormWrapper .input-box {
