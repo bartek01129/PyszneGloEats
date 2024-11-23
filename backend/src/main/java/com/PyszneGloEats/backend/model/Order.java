@@ -36,6 +36,11 @@ public class Order {
     @JsonIgnoreProperties({"orders", "cart", "menuItems", "password","passwordResetToken", "expiryDate", "email", "role" })
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "cook_id")
+    @JsonIgnoreProperties({"orders", "cart", "menuItems", "password","passwordResetToken", "expiryDate", "email", "role" })
+    private User cook;
+
     public Order(List<CartItem> cartItems, Status status) {
         this.cartItems = cartItems;
         this.status = status;

@@ -1,5 +1,7 @@
 .cook-icon {
   border: none;
+  background-color: transparent;
+  padding: 5px;
 }
 
 .tescik {
@@ -27,4 +29,9 @@
 
 .product-info p {
   padding: 20px;
+}
+
+.alert-warning {
+  position: absolute;
+  font-size: 10px;
 }

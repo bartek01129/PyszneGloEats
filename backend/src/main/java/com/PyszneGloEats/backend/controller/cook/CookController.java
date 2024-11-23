@@ -5,10 +5,7 @@ import com.PyszneGloEats.backend.model.Order;
 import com.PyszneGloEats.backend.service.cart.CartService;
 import com.PyszneGloEats.backend.service.cook.CookService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,6 +30,32 @@ public class CookController {
     }
 
 
+    @PutMapping("/order/assign/{cookName}/{id}")
+    public Order assignOrder(@PathVariable String cookName, @PathVariable Long id) {
+        return cookService.setOrderToCook(cookName, id);
+    }
+
+    @GetMapping("/cookOrders/{username}")
+    public List<Order> getAssignedOrders(@PathVariable String username) {
+        return cookService.getCookOrders(username);
+    }
+
+
+
+    @PutMapping("/order/remove/{id}")
+    public Order removeOrderFromCook(@PathVariable Long id) {
+        return cookService.removeFormCook(id);
+    }
+
+    @PutMapping("/order/delete/{id}")
+    public Order deleteOrder(@PathVariable Long id) {
+        return cookService.deleteOrder(id);
+    }
+
+    @PutMapping("/order/complete/{id}")
+    public Order completeOrder(@PathVariable Long id) {
+        return cookService.completeOrder(id);
+    }
 
 
 

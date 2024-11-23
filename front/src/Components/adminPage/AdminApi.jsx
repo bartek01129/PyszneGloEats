@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 const API_URL = 'http://localhost:8080/admin/getUsers';
 
-const roleOption = ['ROLE_ADMIN', 'ROLE_GUEST', 'ROLE_COOK'];
+const roleOption = ['ROLE_ADMIN', 'ROLE_GUEST', 'ROLE_COOK', 'ROLE_WAITER'];
 
 export const AdminApi = () => {
   const token = localStorage.getItem('token');
@@ -48,6 +48,7 @@ export const AdminApi = () => {
             <tr>
               <th>ID</th>
               <th>Name</th>
+              <th>E-mail</th>
               <th>Role</th>
             </tr>
           </thead>
@@ -57,6 +58,7 @@ export const AdminApi = () => {
                 <tr key={user.id}>
                   <td>{user.id}</td>
                   <td>{user.name}</td>
+                  <td>{user.email}</td>
                   <td>{user.role}</td>
                   <td>
                     <select
@@ -68,6 +70,7 @@ export const AdminApi = () => {
                       <option value={roleOption[0]}>ROLE_ADMIN</option>
                       <option value={roleOption[1]}>ROLE_GUEST</option>
                       <option value={roleOption[2]}>ROLE_COOK</option>
+                      <option value={roleOption[3]}>ROLE_WAITER</option>
                     </select>
                   </td>
                 </tr>

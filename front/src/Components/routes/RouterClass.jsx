@@ -4,6 +4,7 @@ import AuthRouter from './AuthRouter';
 import HomeRouter from './HomeRouter';
 import GuestRouter from './GuestRouter';
 import CookRouter from './CookRouter,';
+import WaiterRouter from './WaiterRouter';
 
 function RouterClass() {
   return (
@@ -13,6 +14,7 @@ function RouterClass() {
       <HomeRouter />
       <GuestRouter />
       <CookRouter />
+      <WaiterRouter />
     </Router>
   );
 }

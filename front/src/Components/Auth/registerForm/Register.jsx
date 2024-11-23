@@ -1,49 +1,89 @@
+import { useState } from 'react';
 import { FaUserAlt, FaUnlock } from 'react-icons/fa';
-import { Dropdown, Button, ButtonGroup } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import './Register.css';
+import { Register } from './RegisterApi';
 
 const RegisterForm = () => {
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+  const navigate = useNavigate();
+
+  const handleRegisier = async (e) => {
+    e.preventDefault();
+
+    try {
+      if (password === confirmPassword) {
+        console.log('email: ' + email);
+        console.log('name: ' + name);
+        console.log('pass1: ' + password);
+        console.log('pass2: ' + confirmPassword);
+        await Register(email, name, confirmPassword);
+        navigate('/auth/login');
+      } else {
+        alert('Hasła nie zgadzają się');
+      }
+    } catch (e) {
+      throw new Error(e);
+    }
+  };
+
   return (
-    <div className="wrapper">
-      <form action="">
-        <h1>Register</h1>
+    <div className="registerFormBody">
+      <div className="registerFormWrapper">
+        <form action="">
+          <h1>Zarejestruj się</h1>
 
-        <div className="input-box">
-          <input type="text" placeholder="adres email" required />
-          <FaUserAlt className="icon" />
-        </div>
-
-        <div className="input-box">
-          <input type="text" placeholder="Username" required />
-          <FaUserAlt className="icon" />
-        </div>
-
-        <div className="input-box">
-          <input type="password" placeholder="Password" required />
-          <FaUnlock className="icon" />
-        </div>
-
-        <div className="input-box">
-          <input type="password" placeholder="Repeat Password" required />
-          <FaUnlock className="icon" />
-        </div>
-
-        <div className="dropdown input-box">
-          <Dropdown as={ButtonGroup}>
-            <Button variant="secondary">Jesteś?</Button>
-            <Dropdown.Toggle
-              split
-              variant="secondary"
-              id="dropdown-custom-components"
+          <div className="input-box">
+            <input
+              type="text"
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="email"
+              required
             />
-            <Dropdown.Menu>
-              <Dropdown.Item href="#">Gościem</Dropdown.Item>
-              <Dropdown.Item href="#">Kucharzem</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </div>
+            <FaUserAlt className="icon" />
+          </div>
+          <div className="input-box">
+            <input
+              type="text"
+              onChange={(e) => setName(e.target.value)}
+              placeholder="name"
+              required
+            />
+            <FaUserAlt className="icon" />
+          </div>
 
-        <button type="submit">Zarejestruj się</button>
-      </form>
+          <div className="input-box">
+            <input
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              required
+            />
+            <FaUnlock className="icon" />
+          </div>
+
+          <div className="input-box">
+            <input
+              type="password"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Repeat Password"
+              required
+            />
+            <FaUnlock className="icon" />
+          </div>
+          <button
+            type="submit"
+            className="btn btn-secondary"
+            onClick={(e) => handleRegisier(e)}
+          >
+            Zarejestruj się
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

@@ -28,7 +28,7 @@ public class User {
     private String name;
     private String password;
     @Enumerated(EnumType.STRING)
-    private Role role = Role.ROLE_GUEST;
+    private Role role;
     private String passwordResetToken;
     private LocalDateTime expiryDate;
 
@@ -55,7 +55,9 @@ public class User {
     public enum Role {
         ROLE_GUEST,
         ROLE_COOK,
-        ROLE_ADMIN
+        ROLE_ADMIN,
+        ROLE_WAITER
+
     }
 
 

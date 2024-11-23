@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react';
-import './CookPage.css';
-import { AssignOrder, DelateOrder } from './cookApiService/CookApiService';
+import {
+  CompletOrder,
+  RemoveOrderFromCook,
+} from '../cookApiService/CookApiService';
 
-export const GetOrders = () => {
+export const AssignOrders = () => {
   const token = localStorage.getItem('token');
-  const API_URL = 'http://localhost:8080/cook/orders';
+  const tokenPayload = token.split('.')[1];
+  const decodedPayload = JSON.parse(atob(tokenPayload));
+  const name = decodedPayload.sub;
 
   const [orders, setOrders] = useState([]);
   const [expandedOrders, setExpandedOrders] = useState({});
-  const [showWarning, setShowWarning] = useState({});
+
+  const API_URL = `http://localhost:8080/cook/cookOrders/${name}`;
 
   useEffect(() => {
     fetch(API_URL, {
@@ -20,7 +25,6 @@ export const GetOrders = () => {
     })
       .then((res) => res.json())
       .then((data) => setOrders(data))
-      .then(console.log(orders))
       .catch((err) => console.log(err));
   }, [token, API_URL]);
 
@@ -31,21 +35,8 @@ export const GetOrders = () => {
     }));
   };
 
-  const handleAssignClick = async (order) => {
-    if (order.status === 'CANCELLED') {
-      setShowWarning((prev) => ({ ...prev, [order.id]: true }));
-
-      setTimeout(() => {
-        setShowWarning((prev) => ({ ...prev, [order.id]: false }));
-      }, 2000);
-    } else {
-      await AssignOrder(order.id);
-      console.log('zamówienie anlulowane');
-    }
-  };
-
   function getImage(imgName) {
-    return new URL(`../../assets/products/${imgName}.jpg`, import.meta.url)
+    return new URL(`../../../assets/products/${imgName}.jpg`, import.meta.url)
       .href;
   }
 
@@ -66,7 +57,7 @@ export const GetOrders = () => {
         <tbody className="table-group-divider">
           {orders
             .filter(
-              (order) => order.cook === null && order.status !== 'COMPLETED'
+              (order) => order.cook != null && order.status !== 'COMPLETED'
             )
             .map((order) => (
               <>
@@ -86,23 +77,18 @@ export const GetOrders = () => {
                   <td>
                     <button
                       className="cook-icon"
+                      title="Zfinalizuj zamówienie"
+                      onClick={() => CompletOrder(order.id)}
+                    >
+                      <i className="bi bi-patch-check-fill"></i>
+                    </button>{' '}
+                    <button
+                      className="cook-icon"
                       title="usuń"
-                      onClick={() => DelateOrder(order.id)}
+                      onClick={() => RemoveOrderFromCook(order.id)}
                     >
                       <i className="bi bi-archive"></i>
                     </button>{' '}
-                    {showWarning[order.id] && (
-                      <div className="alert alert-warning" role="alert">
-                        NIE MOZNA USUNĄC ANULOWANEGO ZAMÓWIENAI
-                      </div>
-                    )}
-                    <button
-                      className="cook-icon"
-                      title="przyjmij"
-                      onClick={() => handleAssignClick(order)}
-                    >
-                      <i className="bi bi-arrow-down-circle-fill"></i>
-                    </button>
                   </td>
                 </tr>
                 {expandedOrders[order.id] && (

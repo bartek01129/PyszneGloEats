@@ -27,7 +27,9 @@ const LoginForm = () => {
         console.log('ADMIN');
         navigate('/admin/users');
       } else if (decodedPayload.aud == 'ROLE_COOK') {
-        console.log('COOK');
+        navigate('/cook');
+      } else if (decodedPayload.aud == 'ROLE_WAITER') {
+        navigate('/waiter');
       }
     } catch (err) {
       console.log(err);
