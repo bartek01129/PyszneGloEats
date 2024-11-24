@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './LoginForm.css';
 import { FaUserAlt, FaUnlock } from 'react-icons/fa';
-
+import { FaLock } from 'react-icons/fa';
 import { login } from './LoginApi';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -39,43 +39,68 @@ const LoginForm = () => {
 
   return (
     <div className="webBody">
-      <div className="wrapper">
-        <form action="">
-          <h1>Login</h1>
-          <div className="input-box">
-            <input
-              type="text"
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="adres Email"
-              required
-            />
-            <FaUserAlt className="icon" />
-          </div>
-          <div className="input-box">
-            <input
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-              required
-            />
-            <FaUnlock className="icon" />
-          </div>
-          <div className="forgot-password">
-            <a href="#">
-              <Link to="/auth/emailRestart">Forgot password?</Link>
-            </a>
-          </div>
+      <div className="container h-50">
+        <div className="row justify-content-md-center pt-2">
+          <div className="col-md-5 mt-2 p-0 login">
+            <div className="wrapper ">
+              <form className="form_input" action="">
+                <h1>Zaloguj się</h1>
+                <div className="input-box">
+                  <input
+                    type="text"
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Adres Email"
+                    required
+                  />
+                  <FaUserAlt className="icon" />
+                </div>
+                <div className="input-box">
+                  <input
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Hasło"
+                    required
+                  />
+                  <FaUnlock className="icon" />
+                  <FaLock className="icon" />
+                </div>
+                <div className="forgot-password mb-4 d-flex justify-content-end h6 w-100">
+                  <a href="#">
+                    <Link to="/auth/emailRestart">Zapomniałeś hasła?</Link>
+                  </a>
+                </div>
 
-          <button type="submit" onClick={loginSubmit}>
-            Login
-          </button>
+                <button type="submit" onClick={loginSubmit}>
+                  Login
+                </button>
 
-          <div className="register-link">
-            <p>
-              You hungry? <Link to="/auth/register">Register</Link>
+                <div className="register-link ">
+                  <p>
+                    Zgłodniałeś?{' '}
+                    <Link to="/auth/register">Zarejestruj się</Link>
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div className="col-md-5 mt-2 info gradient-custom p-4">
+            <h1 className="text-center">Nasza historia</h1>
+            <p className="h5">
+              Marcin, utalentowany kucharz z małego miasteczka, zainwestował
+              wszystkie swoje oszczędności w internetową restaurację, marząc o
+              tym, by dzielić się smakami kuchni swojej babci z całym światem.
+              Początkowo brak klientów i doświadczenia w promocji sprawił, że
+              czuł się na skraju porażki. Pewnego dnia, w akcie desperacji,
+              opublikował szczery wpis o swojej pasji i historii babci w mediach
+              społecznościowych, który szybko zdobył serca tysięcy ludzi.
+              Zamówienia zaczęły napływać, a jego strona stała się popularna,
+              dzięki czemu Marcin nie tylko uratował biznes, ale też zatrudnił
+              zespół, by sprostać rosnącemu popytowi. Dziś jego restauracja
+              online to kulinarny fenomen, a Marcin z dumą mówi, że każdy sukces
+              smakuje jak pierogi babci.
             </p>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

@@ -14,14 +14,16 @@ const HomePage = () => {
   return (
     <div className="homeBody">
       <div className="container-fluid homeContainer">
-        <h1>Welcome to PyszneGloEats!</h1>
+        <h1>
+          Witamy w <span className="brand-name">PyszneGloEats!</span>
+        </h1>
         <p>
           Nasz restauracja oferuje szeroką gamę dań z całego świata, w tym
           kuchnię polską, francuską oraz międzynarodową. Wierzymy, że naszym
           celem jest zapewnienie naszym gościom jak najlepszych doświadczeń
           kulinarnych.
         </p>
-        <div className="">
+        <div className="home-warpper">
           <button
             className="btn btn-primary"
             type="submit"

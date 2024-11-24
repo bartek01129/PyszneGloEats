@@ -1,42 +1,95 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+:root {
+  --white: #ffffff;
+  --blue: #757f8e;
+  --bg: #3b3b3b;
+  --button: #3b71ca;
+  --car: #424242;
+  --gray-300: #cdcdcd;
+  --gray-400: #b4b4b4;
+  --gray-500: #9b9b9b;
+  --gray-600: #676767;
+  --gray-700: #424242;
+  --gray-750: #2f2f2f;
+  --gray-800: #212121;
+  --success: #28a745;
 }
 
-.registerFormBody {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  min-width: 100vw;
-  background-image: linear-gradient(to right bottom, #182121, #192522, #1b2822, #202b21, #272e1f, #2e2d1b, #362c1a, #3d2a1b, #42251f, #442128, #402033, #34223e);  background-repeat:no-repeat;
+.register-body {
+  background-color: var(--bg);
+  height: 100%;
+  color: var(--white);
+  font-family: Arial, sans-serif;
 }
 
-.registerFormWrapper {
-  width: 440px;
-  background-color: rgba(56, 46, 46, 0.6);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(30px);
-  color: #ffffff;
+.wrapper-register {
+  background-color: var(--gray-700);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  color: #fff;
   border-radius: 10px;
   padding: 30px 40px;
+  width: 90%;
+  max-width: 400px;
 }
 
-.registerFormWrapper h1 {
+.wrapper-register h1 {
   font-size: 36px;
   text-align: center;
 }
 
-.registerFormWrapper .submitButton {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-
-}
-
-.registerFormWrapper .input-box {
+.wrapper-register .input-box {
   position: relative;
   width: 100%;
   height: 50px;
   margin: 30px 0;
+}
+
+.wrapper-register button {
+  width: 100%;
+  height: 45px;
+  background-color: var(--button);
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--white);
+  font-weight: 700;
+}
+
+.feature-box {
+  background-color: var(--bg);
+  color: var(--white);
+}
+
+h3 span {
+  color: var(--button);
+  font-weight: bold;
+}
+
+.register-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+.highlight {
+  color: #e74c3c;
+  font-weight: bold;
+}
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+li {
+  margin: 10px 0;
+  font-size: 18px;
 }

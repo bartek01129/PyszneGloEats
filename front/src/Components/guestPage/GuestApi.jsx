@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import './GuestPage.css';
 import { AddToCartApi } from './cart/cartService/AddToCartApi';
+import { IoIosAddCircleOutline } from 'react-icons/io';
+import { LuMinusCircle } from 'react-icons/lu';
 
 export const GuestApi = () => {
   const tokenStorage = localStorage.getItem('token');
@@ -63,49 +64,58 @@ export const GuestApi = () => {
 
   return (
     <div className="container-fluid product-container">
-      {products.map((product) => {
-        return (
-          <div key={product.id} className="card" style={{ width: '15rem' }}>
-            <img
-              className="card-img-top"
-              src={getImage(product.productName)}
-              alt="Card image cap"
-            />
-            <div className="card-body">
-              <h5 className="card-title">{product.productName}</h5>
-              <p className="card-text">{product.description}</p>
-              <p className="card-text">{product.price}</p>
-              <div className="quantity">
-                <button
-                  href="#"
-                  className="btnQ"
-                  onClick={() => decrementQuantity(product.productName)}
-                >
-                  -
-                </button>
-                <p className="cardQ">{product.quantity}</p>
-                <button
-                  href="#"
-                  className="btnQ"
-                  onClick={() => incrementQuantity(product.productName)}
-                >
-                  +
-                </button>
+      <div className="row g-5 m-1">
+        {products.map((product) => {
+          return (
+            <div className="col-md-6 col-sm-12" key={product.id}>
+              <div className="row row-card">
+                <div className="col-10 col-xs-12 info-box">
+                  <div className="row ">
+                    <div className="col-8  card-name">
+                      {product.productName}
+                    </div>
+                    <div className="col-4 card-price">{product.price}</div>
+                  </div>
+                  <div className="row">
+                    <div className="col-8  card-desc">
+                      {product.description}
+                    </div>
+                    <div className="col-4  card-quan">
+                      <div className="que-box">
+                        <button
+                          href="#"
+                          className="que-button"
+                          onClick={() => decrementQuantity(product.productName)}
+                        >
+                          <i className="bi bi-dash"></i>
+                        </button>
+                        <p className="quantity">{product.quantity}</p>
+                        <button
+                          href="#"
+                          className="que-button"
+                          onClick={() => incrementQuantity(product.productName)}
+                        >
+                          <i className="bi bi-plus"></i>
+                        </button>
+                      </div>
+                      <button className="bag-button">
+                        <i className="bi bi-bag-plus-fill"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-2 p-0 img d-flex justify-content-end img-box">
+                  <img
+                    className="img-fluid img-card"
+                    src={getImage(product.productName)}
+                    alt="Card image cap"
+                  />
+                </div>
               </div>
-              <a
-                href="#"
-                className="btn btn-primary"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleAddToCart(product.productName, product.quantity);
-                }}
-              >
-                Dodaj do koszyka
-              </a>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };
