@@ -63,15 +63,17 @@ export const CartApi = () => {
   };
 
   return (
-    <div className="container-fluid cartContainer">
-      <table>
+    <div className="table-responsive">
+      <table className="table table-striped table-hover table-bordered">
         <thead>
-          <th>zdjęcie</th>
-          <th>nazwa produktu</th>
-          <th>opis</th>
-          <th>cena</th>
-          <th>ilość</th>
-          <th></th>
+          <tr>
+            <th>zdjęcie</th>
+            <th>nazwa produktu</th>
+            <th>opis</th>
+            <th>cena</th>
+            <th>ilość</th>
+            <th></th>
+          </tr>
         </thead>
         <tbody>
           {menuItems.map((item) => {
@@ -79,26 +81,25 @@ export const CartApi = () => {
               <tr className="productRow" key={item.id}>
                 <td>
                   <img
-                    className="productImage"
+                    className="img-fluid cart-img"
                     src={getImage(item.productName)}
+                    alt={item.productName}
                   />
                 </td>
-                <td>{item.productName}</td>
-                <td>{item.description}</td>
-                <td>{item.price} zł</td>
-                <td>
-                  <div className="quantity">
+                <td className="text-truncate">{item.productName}</td>
+                <td className="description-cell">{item.description}</td>
+                <td className="">{item.price} zł</td>
+                <td className="">
+                  <div className="d-flex justify-content-between align-items-center w-100 h-100">
                     <button
-                      href="#"
-                      className="btnQ"
+                      className="btn btn-secondary"
                       onClick={() => handleDecrement(item.productName)}
                     >
                       -
                     </button>
-                    <p className="cardQ">{item.quantity}</p>
+                    <p className="m-0">{item.quantity}</p>
                     <button
-                      href="#"
-                      className="btnQ"
+                      className="btn btn-secondary"
                       onClick={() => handleIncrement(item.productName)}
                     >
                       +
@@ -107,7 +108,7 @@ export const CartApi = () => {
                 </td>
                 <td>
                   <button
-                    className="btnQ"
+                    className="btn btn-danger"
                     onClick={() => removeItemFormCart(item.productName)}
                   >
                     <i className="bi bi-trash"></i>

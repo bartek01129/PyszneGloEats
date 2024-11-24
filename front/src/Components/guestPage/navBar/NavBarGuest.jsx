@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './NavbarGuest.css';
 export const NavBarGuest = () => {
   const token = localStorage.getItem('token');
@@ -36,9 +37,11 @@ export const NavBarGuest = () => {
           </ul>
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <a className="nav-link " href="#">
-                <i className="bi bi-basket2 p-2"></i>Koszyk
-              </a>
+              <Link to="/guest/cart">
+                <a className="nav-link " href="#">
+                  <i className="bi bi-basket2 p-2"></i>Koszyk
+                </a>
+              </Link>
             </li>
             <li className="nav-item active ">
               <a className="nav-link" href="/cook/assignOrders">

@@ -4,19 +4,37 @@
   box-sizing: border-box;
 }
 
-.cartBody {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-size: cover;
-  background-position: center;
-  width: 100vw;
-  height: 100vh;
-}
-
 .productImage {
   width: 70px;
   height: 70px;
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.table-wrapper {
+  width: 90vw;
+}
+
+.cart-img {
+  width: 7rem;
+  height: 7rem;
+}
+
+.productRow td {
+  max-height: 4rem;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.table th,
+.table td {
+  max-width: 200px;
 }

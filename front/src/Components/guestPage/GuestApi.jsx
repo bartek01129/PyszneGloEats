@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import { AddToCartApi } from './cart/cartService/AddToCartApi';
-import { IoIosAddCircleOutline } from 'react-icons/io';
-import { LuMinusCircle } from 'react-icons/lu';
 
 export const GuestApi = () => {
   const tokenStorage = localStorage.getItem('token');
@@ -98,7 +96,16 @@ export const GuestApi = () => {
                           <i className="bi bi-plus"></i>
                         </button>
                       </div>
-                      <button className="bag-button">
+                      <button
+                        className="bag-button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleAddToCart(
+                            product.productName,
+                            product.quantity
+                          );
+                        }}
+                      >
                         <i className="bi bi-bag-plus-fill"></i>
                       </button>
                     </div>

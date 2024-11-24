@@ -1,6 +1,7 @@
 import { CartApi } from './CartApi';
 import './Cart.css';
 import { CreateOrder } from './orderService/OrderApi';
+import { NavBarGuest } from '../navBar/NavBarGuest';
 
 const handleCreateOrder = async () => {
   await CreateOrder();
@@ -8,7 +9,7 @@ const handleCreateOrder = async () => {
 const Cart = () => {
   return (
     <div className="cartBody">
-      <h1>koszyk</h1>
+      <NavBarGuest />
       <CartApi />
       <button className="btn btn-primary" onClick={() => handleCreateOrder()}>
         Zamów
