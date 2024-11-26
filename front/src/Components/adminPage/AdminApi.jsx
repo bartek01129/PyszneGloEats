@@ -40,31 +40,35 @@ export const AdminApi = () => {
   }, [token]);
 
   return (
-    <>
-      <div className="userTableContainer">
-        <h2>User List</h2>
-        <table>
+    <div className="table-wrapper">
+      <div className="table-responsive table-box">
+        <table className="table table-striped table-hover table-bordered">
           <thead>
             <tr>
               <th>ID</th>
               <th>Name</th>
               <th>E-mail</th>
               <th>Role</th>
+              <th>
+                <i className="bi bi-person-workspace"></i>
+              </th>
             </tr>
           </thead>
+
           <tbody>
             {users.map((user) => {
               return (
-                <tr key={user.id}>
+                <tr className="productRow" key={user.id}>
                   <td>{user.id}</td>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>{user.role}</td>
-                  <td>
+                  <td className="role-wrapper">
                     <select
                       name="role"
                       id="role"
                       onChange={(e) => handleRoleChange(user.id, e)}
+                      className="styled-select"
                     >
                       <option value="">Zmien role uzytkownika</option>
                       <option value={roleOption[0]}>ROLE_ADMIN</option>
@@ -79,6 +83,6 @@ export const AdminApi = () => {
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 };

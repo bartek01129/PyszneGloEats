@@ -1,10 +1,34 @@
-.adminBody {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-size: cover;
-  background-position: center;
-  width: 100vw;
+.role-wrapper {
+  text-align: center;
+}
+
+.styled-select {
+  width: 70%;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  color: #333;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.styled-select:hover {
+  background-color: #e9ecef;
+  border-color: #0056b3;
+}
+
+.styled-select option {
+  padding: 10px;
+}
+
+.styled-select:focus {
+  border-color: #0056b3;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.table-wrapper {
   height: 100vh;
 }

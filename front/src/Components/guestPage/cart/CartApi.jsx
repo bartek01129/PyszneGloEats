@@ -63,62 +63,65 @@ export const CartApi = () => {
   };
 
   return (
-    <div className="table-responsive">
-      <table className="table table-striped table-hover table-bordered">
-        <thead>
-          <tr>
-            <th>zdjęcie</th>
-            <th>nazwa produktu</th>
-            <th>opis</th>
-            <th>cena</th>
-            <th>ilość</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {menuItems.map((item) => {
-            return (
-              <tr className="productRow" key={item.id}>
-                <td>
-                  <img
-                    className="img-fluid cart-img"
-                    src={getImage(item.productName)}
-                    alt={item.productName}
-                  />
-                </td>
-                <td className="text-truncate">{item.productName}</td>
-                <td className="description-cell">{item.description}</td>
-                <td className="">{item.price} zł</td>
-                <td className="">
-                  <div className="d-flex justify-content-between align-items-center w-100 h-100">
+    <div className="table-wrapper">
+      <div className="table-responsive table-box">
+        <table className="table table-striped table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>Zdjęcie</th>
+              <th>Nazwa produktu</th>
+              <th>Opis</th>
+              <th>Cena</th>
+              <th>Ilość</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {menuItems.map((item) => {
+              return (
+                <tr className="productRow" key={item.id}>
+                  <td className="img-wrapper">
+                    <img
+                      className="img-fluid cart-img"
+                      src={getImage(item.productName)}
+                      alt={item.productName}
+                    />
+                  </td>
+                  <td className="text-truncate">{item.productName}</td>
+                  <td className="description-cell">{item.description}</td>
+                  <td className="">{item.price} zł</td>
+                  <td className="">
+                    <div className="d-flex justify-content-between align-items-center w-100 h-100">
+                      <button
+                        className="btn btn-secondary"
+                        onClick={() => handleDecrement(item.productName)}
+                      >
+                        -
+                      </button>
+                      <p className="m-0">{item.quantity}</p>
+                      <button
+                        className="btn btn-secondary"
+                        onClick={() => handleIncrement(item.productName)}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </td>
+                  <td className="bin">
                     <button
-                      className="btn btn-secondary"
-                      onClick={() => handleDecrement(item.productName)}
+                      className="btn btn-danger"
+                      onClick={() => removeItemFormCart(item.productName)}
                     >
-                      -
+                      <i className="bi bi-trash"></i>
                     </button>
-                    <p className="m-0">{item.quantity}</p>
-                    <button
-                      className="btn btn-secondary"
-                      onClick={() => handleIncrement(item.productName)}
-                    >
-                      +
-                    </button>
-                  </div>
-                </td>
-                <td>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => removeItemFormCart(item.productName)}
-                  >
-                    <i className="bi bi-trash"></i>
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
