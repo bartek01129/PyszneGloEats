@@ -20,28 +20,18 @@
   box-sizing: border-box;
 }
 
-.productImage {
-  width: 70px;
-  height: 70px;
-}
-
-.table-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 20px;
-}
-
 .table-wrapper {
   display: flex;
   width: 100%;
   justify-content: center;
+  align-items: center;
   background-color: gainsboro;
 }
 
 .table-box {
   width: 90vw;
+  height: 100vh;
+  background-color: var(--white);
 }
 
 tr th {
@@ -61,13 +51,13 @@ tbody tr {
 }
 
 .cart-img {
-  width: 10rem;
-  height: 10rem;
+  width: 7rem;
+  height: 7rem;
 }
 
-.productRow td {
+/* .productRow td {
   max-height: 4rem;
-}
+} */
 
 .table-responsive {
   overflow-x: auto;
@@ -76,4 +66,13 @@ tbody tr {
 .table th,
 .table td {
   min-width: 200px;
+}
+
+.order-button {
+  width: 12rem;
+  text-align: center;
+}
+
+.button-wrapper {
+  text-align: center;
 }

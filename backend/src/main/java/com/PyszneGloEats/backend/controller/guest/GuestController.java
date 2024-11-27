@@ -1,6 +1,7 @@
 package com.PyszneGloEats.backend.controller.guest;
 
 import com.PyszneGloEats.backend.dto.cart.CartItemDTO;
+import com.PyszneGloEats.backend.dto.cart.DetailsDto;
 import com.PyszneGloEats.backend.dto.menuItem.DropToCartDTO;
 import com.PyszneGloEats.backend.dto.menuItem.UserMenuDTO;
 import com.PyszneGloEats.backend.model.MenuItem;
@@ -56,5 +57,10 @@ public class GuestController {
     @PostMapping("/createOrder/{name}")
     public Order createOrder(@PathVariable String name) {
         return cartService.createOrder(name);
+    }
+
+    @GetMapping("/order/details/{name}")
+    public DetailsDto getOrderDetails(@PathVariable String name) {
+        return cartService.getOrdersDetails(name);
     }
 }

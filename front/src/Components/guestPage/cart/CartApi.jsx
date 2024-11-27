@@ -5,6 +5,8 @@ import {
   removeItemFromCart,
 } from './cartService/QuantityApi';
 
+import { CreateOrder } from './orderService/OrderApi';
+
 export const CartApi = () => {
   const token = localStorage.getItem('token');
   const tokenPayload = token.split('.')[1];
@@ -19,6 +21,9 @@ export const CartApi = () => {
     return new URL(`../../../assets/products/${imgName}.jpg`, import.meta.url)
       .href;
   }
+  const handleCreateOrder = async () => {
+    await CreateOrder();
+  };
 
   useEffect(() => {
     fetch(API_URL, {
@@ -121,6 +126,14 @@ export const CartApi = () => {
             })}
           </tbody>
         </table>
+        <div className="button-wrapper">
+          <button
+            className="btn btn-success order-button"
+            onClick={() => handleCreateOrder()}
+          >
+            Zamów
+          </button>
+        </div>
       </div>
     </div>
   );

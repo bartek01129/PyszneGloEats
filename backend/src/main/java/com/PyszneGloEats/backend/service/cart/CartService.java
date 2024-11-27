@@ -1,6 +1,7 @@
 package com.PyszneGloEats.backend.service.cart;
 
 import com.PyszneGloEats.backend.dto.cart.CartItemDTO;
+import com.PyszneGloEats.backend.dto.cart.DetailsDto;
 import com.PyszneGloEats.backend.dto.menuItem.DropToCartDTO;
 import com.PyszneGloEats.backend.dto.menuItem.UserMenuDTO;
 import com.PyszneGloEats.backend.model.*;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -78,7 +78,7 @@ public class CartService {
     public CartItemDTO decrementItem(String name, String productName) {
         User user = userRepository.findByName(name).orElseThrow();
         CartItem cartItem = user.getCart().getCartItems().stream().filter(item -> item.getMenuItem().getProductName().equals(productName)).findFirst().orElseThrow();
-        if(cartItem.getQuantity() > 0) {
+        if (cartItem.getQuantity() > 0) {
             cartItem.setQuantity(cartItem.getQuantity() - 1);
         }
         userRepository.save(user);
@@ -90,9 +90,7 @@ public class CartService {
         User user = userRepository.findByName(userMenuDTO.getUsername()).orElseThrow();
         Cart cart = user.getCart();
 
-        Optional<CartItem> cartItemToRemove = cart.getCartItems().stream()
-                .filter(cartItem -> cartItem.getMenuItem().getProductName().equals(userMenuDTO.getProductName()))
-                .findFirst();
+        Optional<CartItem> cartItemToRemove = cart.getCartItems().stream().filter(cartItem -> cartItem.getMenuItem().getProductName().equals(userMenuDTO.getProductName())).findFirst();
 
         if (cartItemToRemove.isPresent()) {
             cart.getCartItems().remove(cartItemToRemove.get());
@@ -141,7 +139,7 @@ public class CartService {
             item.setOrder(order);
 
         }
-        if(!cart.getCartItems().isEmpty()) {
+        if (!cart.getCartItems().isEmpty()) {
             orderRepository.save(order);
         } else {
             throw new IllegalArgumentException("Cart is empty");
@@ -155,8 +153,24 @@ public class CartService {
 
     }
 
+    public DetailsDto getOrdersDetails(String name) {
+        List<CartItem> items = getItemsFormCart(name);
+        DetailsDto detailsDto = new DetailsDto();
 
+        double price = 0;
+        int product = 0;
+        for (CartItem item : items) {
+            price += item.getMenuItem().getPrice();
+            product += item.getQuantity();
 
+        }
+        price = Math.floor(price * 100) / 100;
+
+        detailsDto.setTotalPrice(price);
+        detailsDto.setTotalQuantity(product);
+        return detailsDto;
+
+    }
 
 
 }
