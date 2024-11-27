@@ -1,0 +1,38 @@
+:root {
+  --white: #ffffff;
+  --blue: #757f8e;
+  --bg: #3b3b3b;
+  --button: #3b71ca;
+  --car: #424242;
+  --gray-300: #cdcdcd;
+  --gray-400: #b4b4b4;
+  --gray-500: #9b9b9b;
+  --gray-600: #676767;
+  --gray-700: #424242;
+  --gray-750: #2f2f2f;
+  --gray-800: #212121;
+  --success: #28a745;
+}
+
+.navbar-waiter {
+  background-color: var(--bg);
+}
+
+.navbar-waiter-container a {
+  color: var(--white);
+}
+
+.navbar-waiter-container a span {
+  color: var(--success);
+}
+
+.navbar-brand {
+  cursor: default;
+  font-size: 1.5rem;
+  font-weight: bold;
+  user-select: none;
+}
+
+a {
+  text-decoration: none;
+}

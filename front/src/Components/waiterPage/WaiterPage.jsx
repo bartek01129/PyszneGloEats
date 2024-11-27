@@ -1,4 +1,4 @@
-import NavBarWaiter from './NavBarWaiter';
+import { NavBarWaiter } from './navBarWaiter/NavBarWaiter.jsx';
 import { WaiterOrders } from './WaiterApi';
 
 const WaiterPage = () => {

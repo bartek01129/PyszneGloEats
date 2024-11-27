@@ -1,15 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import { Logout } from '../../Logout';
-import './NavBarAdmin.css';
-export const NavBarAdmin = () => {
+import './NavBarWaiter.css';
+export const NavBarWaiter = () => {
   const token = localStorage.getItem('token');
   const tokenPayload = token.split('.')[1];
   const decodedPayload = JSON.parse(atob(tokenPayload));
   const name = decodedPayload.sub;
   const navigate = useNavigate();
   return (
-    <nav className="navbar m-0 navbar-expand-lg  navbar-guest">
-      <div className="container-fluid navbar-guest-container">
+    <nav className="navbar m-0 navbar-expand-lg  navbar-waiter">
+      <div className="container-fluid navbar-waiter-container">
         <a className="navbar-brand ">
           Pyszne<span>Glo</span>Eats
         </a>
