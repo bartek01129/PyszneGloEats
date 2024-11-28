@@ -23,6 +23,7 @@ export const CartApi = () => {
   }
   const handleCreateOrder = async () => {
     await CreateOrder();
+    
   };
 
   useEffect(() => {

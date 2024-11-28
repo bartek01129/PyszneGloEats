@@ -28,14 +28,20 @@ export const NavBarGuest = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
+            <Link to={{
+                pathname: `/guest/products`
+              }}>
               <a className="nav-link " aria-current="page" href="#">
                 Sklep
               </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                Moje zamówienia
-              </a>
+
+                <a className="nav-link" href="#">
+                  Moje zamówienia
+                </a>
+
             </li>
           </ul>
           <ul className="navbar-nav ms-auto">

@@ -19,6 +19,7 @@ export const CreateOrder = async () => {
     if (response.ok) {
       const data = await response.json();
       console.log(data);
+      window.location.reload();
     } else {
       throw new Error('Failed to create order');
     }
