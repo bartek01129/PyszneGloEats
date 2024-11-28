@@ -10,5 +10,4 @@ import lombok.*;
 public class DetailsDto {
 
     private double totalPrice;
-    private int totalQuantity;
 }

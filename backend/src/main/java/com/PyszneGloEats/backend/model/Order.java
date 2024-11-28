@@ -30,6 +30,7 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     private Status status;
+    private int pickUpCode;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -47,7 +48,7 @@ public class Order {
     }
 
     public enum Status {
-        PLACED, IN_PROGRESS, COMPLETED, CANCELLED, PICKED_UP
+        PLACED, IN_PROGRESS, COMPLETED, CANCELLED, PICKED_UP, READY
     }
 
 

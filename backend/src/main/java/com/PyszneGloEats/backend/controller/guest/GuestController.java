@@ -4,9 +4,11 @@ import com.PyszneGloEats.backend.dto.cart.CartItemDTO;
 import com.PyszneGloEats.backend.dto.cart.DetailsDto;
 import com.PyszneGloEats.backend.dto.menuItem.DropToCartDTO;
 import com.PyszneGloEats.backend.dto.menuItem.UserMenuDTO;
+import com.PyszneGloEats.backend.dto.order.PickUpDTO;
 import com.PyszneGloEats.backend.model.MenuItem;
 import com.PyszneGloEats.backend.model.Order;
 import com.PyszneGloEats.backend.service.cart.CartService;
+import com.PyszneGloEats.backend.service.guest.GuestService;
 import com.PyszneGloEats.backend.service.menuItme.MenuItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,7 @@ public class GuestController {
 
     private final MenuItemService menuItemService;
     private final CartService cartService;
+    private final GuestService guestService;
 
 
     @GetMapping("/getAll")
@@ -62,5 +65,16 @@ public class GuestController {
     @GetMapping("/order/details/{name}")
     public DetailsDto getOrderDetails(@PathVariable String name) {
         return cartService.getOrdersDetails(name);
+    }
+
+    @GetMapping("/order/orders/{name}")
+    public List<Order> getUserOrders(@PathVariable String name) {
+        return guestService.getUserOrderList(name);
+    }
+
+
+    @PostMapping("/order/pickup")
+    public Order pickUpOrder(@RequestBody PickUpDTO pickUpDTO) {
+        return guestService.pickUpOrder(pickUpDTO);
     }
 }

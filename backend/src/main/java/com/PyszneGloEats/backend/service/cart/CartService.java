@@ -158,19 +158,18 @@ public class CartService {
         DetailsDto detailsDto = new DetailsDto();
 
         double price = 0;
-        int product = 0;
         for (CartItem item : items) {
             price += item.getMenuItem().getPrice();
-            product += item.getQuantity();
-
         }
         price = Math.floor(price * 100) / 100;
 
         detailsDto.setTotalPrice(price);
-        detailsDto.setTotalQuantity(product);
         return detailsDto;
 
     }
+    
+    
+
 
 
 }

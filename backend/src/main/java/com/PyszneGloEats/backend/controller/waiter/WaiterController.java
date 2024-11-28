@@ -3,9 +3,7 @@ package com.PyszneGloEats.backend.controller.waiter;
 import com.PyszneGloEats.backend.model.Order;
 import com.PyszneGloEats.backend.service.waiter.WaiterService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +19,11 @@ public class WaiterController {
     @GetMapping("/orders")
     public List<Order> getWaiterOrders() {
         return waiterService.getWaiterOrders();
+    }
+
+    @PostMapping("/prepareOrder/{id}")
+    public int generatePickUpCode(@PathVariable Long id) {
+        return waiterService.generatePickUpCode(id);
     }
 
 }

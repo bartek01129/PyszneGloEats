@@ -32,6 +32,7 @@ public class User {
     private String passwordResetToken;
     private LocalDateTime expiryDate;
 
+
     public User(String email,String name, String password, Role role) {
         this.email = email;
         this.name = name;

@@ -1,54 +1,19 @@
 import { useEffect, useState } from 'react';
-import './WaiterPage.css';
+import './GuestOrdersPage.css';
 
-export const WaiterOrders = () => {
-  const token = localStorage.getItem('token');
-  const API_URL = 'http://localhost:8080/waiter/orders';
+export const GuestOrdersApi = () => {
+  const tokenStorage = localStorage.getItem('token');
+  const tokenPayload = tokenStorage.split('.')[1];
+  const decodedPayload = JSON.parse(atob(tokenPayload));
+  const username = decodedPayload.sub;
 
   const [orders, setOrders] = useState([]);
   const [expandedOrders, setExpandedOrders] = useState({});
-  const [loading, setLoading] = useState(false);
 
-  const prepareOrder = async (id) => {
-    setLoading(true);
-
-    try {
-      const API_URL = `http://localhost:8080/waiter/prepareOrder/${id}`;
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        window.location.reload();
-      } else {
-        throw new Error('Failed to prepare order');
-      }
-    } catch (e) {
-      throw new Error(e);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetch(API_URL, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setOrders(data))
-      .catch((err) => console.log(err));
-  }, [token, API_URL]);
+  function getImage(imgName) {
+    return new URL(`../../../assets/products/${imgName}.jpg`, import.meta.url)
+      .href;
+  }
 
   const handleOpenOrder = (orderId) => {
     setExpandedOrders((prev) => ({
@@ -57,26 +22,24 @@ export const WaiterOrders = () => {
     }));
   };
 
-  function getImage(imgName) {
-    return new URL(`../../assets/products/${imgName}.jpg`, import.meta.url)
-      .href;
-  }
+  const API_URL = `http://localhost:8080/guest/order/orders/${username}`;
+
+  useEffect(() => {
+    fetch(API_URL, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${tokenStorage}`,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setOrders(data))
+      .catch((err) => console.log(err));
+  }, [tokenStorage, API_URL]);
 
   return (
     <div className="table-wrapper">
-      {loading && (
-        <div className="loading-overlay">
-          <div className="h5 ">Twoje zamówienie jest w trakcie realizacji</div>
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden"></span>
-          </div>
-        </div>
-      )}
-
-      <div
-        className="table-responsive table-box"
-        style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}
-      >
+      <div className="table-responsive table-box">
         <table className="table">
           <thead>
             <tr>
@@ -84,15 +47,12 @@ export const WaiterOrders = () => {
               <th scope="col">Imię gościa</th>
               <th scope="col">Ilość produktów na zamówieniu</th>
               <th scope="col">Status</th>
-              <th scope="col">
-                <i className="bi bi-brush"></i>
-              </th>
             </tr>
           </thead>
           <tbody className="table-group-divider">
             {orders.map((order) => (
               <>
-                <tr key={order.id}>
+                <tr key={order.id} className="text-center">
                   <th onClick={() => handleOpenOrder(order.id)} scope="row">
                     {order.id}
                   </th>
@@ -104,15 +64,6 @@ export const WaiterOrders = () => {
                   </td>
                   <td onClick={() => handleOpenOrder(order.id)}>
                     {order.status}
-                  </td>
-                  <td>
-                    <button
-                      className="cook-icon"
-                      title="przyjmij"
-                      onClick={() => prepareOrder(order.id)}
-                    >
-                      <i className="bi bi-arrow-down-circle-fill"></i>
-                    </button>
                   </td>
                 </tr>
                 {expandedOrders[order.id] && (

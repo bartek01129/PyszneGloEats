@@ -28,20 +28,26 @@ export const NavBarGuest = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-            <Link to={{
-                pathname: `/guest/products`
-              }}>
-              <a className="nav-link " aria-current="page" href="#">
-                Sklep
-              </a>
+              <Link
+                to={{
+                  pathname: `/guest/products`,
+                }}
+              >
+                <a className="nav-link " aria-current="page" href="#">
+                  Sklep
+                </a>
               </Link>
             </li>
             <li className="nav-item">
-
+              <Link
+                to={{
+                  pathname: `/guest/orders`,
+                }}
+              >
                 <a className="nav-link" href="#">
                   Moje zamówienia
                 </a>
-
+              </Link>
             </li>
           </ul>
           <ul className="navbar-nav ms-auto">
@@ -53,7 +59,7 @@ export const NavBarGuest = () => {
               </Link>
             </li>
             <li className="nav-item active ">
-              <a className="nav-link" href="/cook/assignOrders">
+              <a className="nav-link">
                 Jesteś zalogowany jako: <b>{name}</b>
               </a>
             </li>

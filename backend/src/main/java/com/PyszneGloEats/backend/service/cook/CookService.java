@@ -19,14 +19,23 @@ public class CookService {
 
 
     public List<Order> getOrders() {
-        return orderRepository.findAll();
+
+        List<Order> orderList = orderRepository.findAll();
+        List<Order> cookOrders = new ArrayList<>();
+
+        for (Order order : orderList) {
+            if (order.getStatus().equals(Order.Status.PLACED)) {
+                cookOrders.add(order);
+            }
+        }
+        return cookOrders;
     }
 
     public Order setOrderToCook(String cookName, Long id) {
         User user = userRepository.findByName(cookName).orElseThrow();
         Order order = orderRepository.findById(id).orElseThrow();
 
-        if(order.getStatus() != Order.Status.CANCELLED) {
+        if (order.getStatus() != Order.Status.CANCELLED) {
             order.setCook(user);
             order.setStatus(Order.Status.IN_PROGRESS);
 
@@ -73,18 +82,17 @@ public class CookService {
         orderRepository.save(order);
         return order;
     }
-    
-    
+
+
     public Order completeOrder(Long id) {
         Order order = orderRepository.findById(id).orElseThrow();
 
         order.setStatus(Order.Status.COMPLETED);
 
         orderRepository.save(order);
-        
+
         return order;
     }
-    
 
 
 }

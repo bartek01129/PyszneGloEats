@@ -47,7 +47,7 @@ const LoginForm = () => {
                 <h1>Zaloguj się</h1>
                 <div className="input-box">
                   <input
-                    type="text"
+                    type="email"
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Adres Email"
                     required

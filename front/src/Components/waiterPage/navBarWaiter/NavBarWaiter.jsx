@@ -28,7 +28,7 @@ export const NavBarWaiter = () => {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <a className="nav-link " aria-current="page" href="#">
-                Użytkownicy
+                Wydaj Zamówienia
               </a>
             </li>
           </ul>

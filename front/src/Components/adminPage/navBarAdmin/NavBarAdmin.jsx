@@ -34,7 +34,7 @@ export const NavBarAdmin = () => {
           </ul>
           <ul className="navbar-nav ms-auto">
             <li className="nav-item active ">
-              <a className="nav-link" href="/cook/assignOrders">
+              <a className="nav-link">
                 Jesteś zalogowany jako: <b>{name}</b>
               </a>
             </li>
