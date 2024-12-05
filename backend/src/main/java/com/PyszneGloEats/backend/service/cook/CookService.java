@@ -32,6 +32,7 @@ public class CookService {
     }
 
     public Order setOrderToCook(String cookName, Long id) {
+
         User user = userRepository.findByName(cookName).orElseThrow();
         Order order = orderRepository.findById(id).orElseThrow();
 

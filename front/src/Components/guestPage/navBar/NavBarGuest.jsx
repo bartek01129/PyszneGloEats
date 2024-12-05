@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import './NavbarGuest.css';
+import './NavBarGuest.css';
 import { Logout } from '../../Logout';
 
 export const NavBarGuest = () => {
