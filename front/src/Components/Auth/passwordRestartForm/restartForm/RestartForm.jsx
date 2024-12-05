@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { FaUserAlt, FaUnlock } from 'react-icons/fa';
 import './RestartForm.css';
 import { useNavigate } from 'react-router-dom';
 import { RestartFormApi } from './RestartFormApi';
@@ -32,7 +31,6 @@ const RestartForm = () => {
               placeholder="kod autoryzacyjny"
               required
             />
-            <FaUserAlt className="icon" />
           </div>
 
           <div className="input-box">
@@ -42,7 +40,6 @@ const RestartForm = () => {
               placeholder="Password"
               required
             />
-            <FaUnlock className="icon" />
           </div>
 
           <div className="input-box">
@@ -52,7 +49,6 @@ const RestartForm = () => {
               placeholder="Repeat Password"
               required
             />
-            <FaUnlock className="icon" />
           </div>
           <button type="submit" className="btn btn-secondary">
             Zresetuj haslo

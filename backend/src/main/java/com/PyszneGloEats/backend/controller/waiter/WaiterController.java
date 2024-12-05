@@ -1,5 +1,6 @@
 package com.PyszneGloEats.backend.controller.waiter;
 
+import com.PyszneGloEats.backend.dto.waiter.MessageDto;
 import com.PyszneGloEats.backend.model.Order;
 import com.PyszneGloEats.backend.service.waiter.WaiterService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,7 @@ public class WaiterController {
     }
 
     @PostMapping("/prepareOrder/{id}")
-    public int generatePickUpCode(@PathVariable Long id) {
+    public MessageDto generatePickUpCode(@PathVariable Long id) {
         return waiterService.generatePickUpCode(id);
     }
 

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { FaUserAlt, FaUnlock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { MdAlternateEmail } from 'react-icons/md';
 import './Register.css';
@@ -103,7 +102,6 @@ const RegisterForm = () => {
                   placeholder="Imię (wymagane)"
                   required
                 />
-                <FaUserAlt className="icon" />
               </div>
 
               <div className="input-box">
@@ -113,7 +111,6 @@ const RegisterForm = () => {
                   placeholder="Hasło (wymagane)"
                   required
                 />
-                <FaUnlock className="icon" />
               </div>
 
               <div className="input-box">
@@ -123,7 +120,6 @@ const RegisterForm = () => {
                   placeholder="Powtórz hasło (wymagane)"
                   required
                 />
-                <FaUnlock className="icon" />
               </div>
               <button
                 type="submit"

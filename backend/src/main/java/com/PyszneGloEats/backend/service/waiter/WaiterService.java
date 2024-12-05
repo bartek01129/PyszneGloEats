@@ -1,12 +1,14 @@
 package com.PyszneGloEats.backend.service.waiter;
 
 import com.PyszneGloEats.backend.dto.mail.EmailDTO;
+import com.PyszneGloEats.backend.dto.waiter.MessageDto;
 import com.PyszneGloEats.backend.model.Order;
 import com.PyszneGloEats.backend.model.User;
 import com.PyszneGloEats.backend.repository.OrderRepository;
 import com.PyszneGloEats.backend.repository.UserRepository;
 import com.PyszneGloEats.backend.service.email.EmailSenderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ public class WaiterService {
 
     private final OrderRepository orderRepository;
     private final EmailSenderService emailSenderService;
-    private final UserRepository userRepository;
+    private final SimpMessagingTemplate messagingTemplate;
 
 
     public List<Order> getWaiterOrders() {
@@ -33,7 +35,7 @@ public class WaiterService {
         return orders;
     }
 
-    public int generatePickUpCode(Long id) {
+    public MessageDto generatePickUpCode(Long id) {
         Order order = orderRepository.findById(id).orElseThrow();
         User user = order.getUser();
 
@@ -46,10 +48,18 @@ public class WaiterService {
         emailSenderService.sendEmail(new EmailDTO(user.getEmail(), "Kod odbioru", body + pickUpCode));
 
         orderRepository.save(order);
-
-        return pickUpCode;
+        sendMessage(user.getName(),"Zamówienie gotowe do odbioru");
+        System.out.println("Message sent");
+        return new MessageDto(user.getName(),pickUpCode,"Zamówienie gotowe do odbioru");
 
     }
+
+
+    public void sendMessage(String username, String content) {
+        messagingTemplate.convertAndSend("/topic/message" + username, content);
+    }
+
+
 
 
 }

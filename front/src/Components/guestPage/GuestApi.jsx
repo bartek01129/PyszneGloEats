@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import { AddToCartApi } from './cart/cartService/AddToCartApi';
+import { ModalReceiver } from '../waiterPage/waiterService/WaiterService';
 
 export const GuestApi = () => {
-  const tokenStorage = localStorage.getItem('token');
-  const tokenPayload = tokenStorage.split('.')[1];
+  const token = localStorage.getItem('token');
+  const tokenPayload = token.split('.')[1];
   const decodedPayload = JSON.parse(atob(tokenPayload));
   const username = decodedPayload.sub;
 
   const [products, setProducts] = useState([]);
+  const [message, setMessage] = useState('');
+
+  ModalReceiver(username, setMessage, token);
 
   const handleAddToCart = async (value, quantity) => {
     await AddToCartApi(value, quantity);
@@ -17,6 +21,7 @@ export const GuestApi = () => {
     return new URL(`../../assets/products/${imgName}.jpg`, import.meta.url)
       .href;
   }
+
   const incrementQuantity = (name) => {
     setProducts((prevProducts) =>
       prevProducts.map((product) =>
@@ -45,7 +50,7 @@ export const GuestApi = () => {
     fetch(API_URL, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${tokenStorage}`,
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => res.json())
@@ -58,7 +63,7 @@ export const GuestApi = () => {
         )
       )
       .catch((error) => console.error(error));
-  }, [tokenStorage, API_URL]);
+  }, [token, API_URL]);
 
   return (
     <div className="container-fluid product-container">

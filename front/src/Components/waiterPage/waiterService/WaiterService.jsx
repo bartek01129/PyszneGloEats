@@ -1,25 +1,19 @@
-export const prepareOrder = async (id) => {
-  const token = localStorage.getItem('token');
+import { Stomp } from '@stomp/stompjs';
+import { useEffect } from 'react';
+import SockJS from 'sockjs-client';
 
-  try {
-    const API_URL = `http://localhost:8080/waiter/prepareOrder/${id}`;
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id }),
+export const ModalReceiver = (username, setMessage, token) => {
+  useEffect(() => {
+    const socket = new SockJS('http://localhost:8080/ws');
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect({ Authorization: `Bearer ${token}` }, () => {
+      stompClient.subscribe(`/topic/messages/${username}`, (msg) => {
+        setMessage(JSON.parse(msg.body));
+      });
     });
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-      window.location.reload();
-    } else {
-      throw new Error('Failed to prepare order');
-    }
-  } catch (e) {
-    throw new Error(e);
-  }
+    return () => {
+      stompClient.disconnect();
+    };
+  }, [username, setMessage, token]);
 };

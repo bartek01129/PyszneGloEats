@@ -38,7 +38,8 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**").permitAll()  //    hasAnyAuthority("ROLE_ADMIN")
                         .requestMatchers("/guest/**").permitAll() //.hasAnyAuthority("ROLE_ADMIN", "ROLE_GUEST")
                         .requestMatchers("/cook/**").permitAll()
-                        .requestMatchers("/waiter/**").permitAll() //.hasAnyAuthority("ROLE_COOK", "ROLE_ADMIN")
+                        .requestMatchers("/waiter/**").permitAll()
+                        .requestMatchers("/ws/**").permitAll() //.hasAnyAuthority("ROLE_COOK", "ROLE_ADMIN")
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/webjars/**").permitAll()  //Autoryzacja na czas development
                         .anyRequest().authenticated()
                 )
@@ -54,7 +55,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfig() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5173"));
+        configuration.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true);
