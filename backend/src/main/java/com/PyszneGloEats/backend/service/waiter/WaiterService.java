@@ -48,15 +48,15 @@ public class WaiterService {
         emailSenderService.sendEmail(new EmailDTO(user.getEmail(), "Kod odbioru", body + pickUpCode));
 
         orderRepository.save(order);
-        sendMessage(user.getName(),"Zamówienie gotowe do odbioru");
-        System.out.println("Message sent");
-        return new MessageDto(user.getName(),pickUpCode,"Zamówienie gotowe do odbioru");
+        String content = "Zamówienie gotowe do odbioru";
+        sendMessage(user.getName(),content);
+        return new MessageDto(user.getName(),pickUpCode,content);
 
     }
 
 
     public void sendMessage(String username, String content) {
-        messagingTemplate.convertAndSend("/topic/message" + username, content);
+        messagingTemplate.convertAndSend("/topic/messages/" + username, content);
     }
 
 

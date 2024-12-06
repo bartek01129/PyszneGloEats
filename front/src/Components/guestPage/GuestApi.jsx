@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { AddToCartApi } from './cart/cartService/AddToCartApi';
-import { ModalReceiver } from '../waiterPage/waiterService/WaiterService';
 
 export const GuestApi = () => {
   const token = localStorage.getItem('token');
@@ -9,9 +8,6 @@ export const GuestApi = () => {
   const username = decodedPayload.sub;
 
   const [products, setProducts] = useState([]);
-  const [message, setMessage] = useState('');
-
-  ModalReceiver(username, setMessage, token);
 
   const handleAddToCart = async (value, quantity) => {
     await AddToCartApi(value, quantity);

@@ -1,20 +1,14 @@
 import { useEffect, useState } from 'react';
 import './WaiterPage.css';
-import { ModalReceiver } from './waiterService/WaiterService';
 
 export const WaiterOrders = () => {
   const token = localStorage.getItem('token');
-  const tokenPayload = token.split('.')[1];
-  const decodedPayload = JSON.parse(atob(tokenPayload));
-  const username = decodedPayload.sub;
+
   const API_URL = 'http://localhost:8080/waiter/orders';
 
   const [orders, setOrders] = useState([]);
   const [expandedOrders, setExpandedOrders] = useState({});
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
-
-  ModalReceiver(username, setMessage, token);
 
   const prepareOrder = async (id) => {
     setLoading(true);
@@ -31,7 +25,6 @@ export const WaiterOrders = () => {
       });
 
       if (response.ok) {
-        console.log(message);
         // window.location.reload();
       } else {
         throw new Error('Failed to prepare order');
@@ -70,11 +63,6 @@ export const WaiterOrders = () => {
 
   return (
     <div className="table-wrapper">
-      {message && (
-        <div className="alert alert-info" role="alert">
-          {message}
-        </div>
-      )}
       {loading && (
         <div className="loading-overlay">
           <div className="h5 ">Twoje zamówienie jest w trakcie realizacji</div>
