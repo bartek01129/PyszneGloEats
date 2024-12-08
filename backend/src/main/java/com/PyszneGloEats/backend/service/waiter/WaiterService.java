@@ -2,12 +2,15 @@ package com.PyszneGloEats.backend.service.waiter;
 
 import com.PyszneGloEats.backend.dto.mail.EmailDTO;
 import com.PyszneGloEats.backend.dto.waiter.MessageDto;
+import com.PyszneGloEats.backend.dto.waiter.Payload;
 import com.PyszneGloEats.backend.model.Order;
 import com.PyszneGloEats.backend.model.User;
 import com.PyszneGloEats.backend.repository.OrderRepository;
 import com.PyszneGloEats.backend.repository.UserRepository;
 import com.PyszneGloEats.backend.service.email.EmailSenderService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
@@ -46,18 +49,28 @@ public class WaiterService {
 
         String body = "To jest twój kod do odbioru zajebistego żarcia kurwo jebana: ";
         emailSenderService.sendEmail(new EmailDTO(user.getEmail(), "Kod odbioru", body + pickUpCode));
-
+        
         orderRepository.save(order);
-        String content = "Zamówienie gotowe do odbioru";
+        Payload content = new Payload(order.getId(),pickUpCode);
         sendMessage(user.getName(),content);
-        return new MessageDto(user.getName(),pickUpCode,content);
+        return new MessageDto(order.getId(),user.getName(),pickUpCode,"gotowe");
 
     }
 
 
-    public void sendMessage(String username, String content) {
-        messagingTemplate.convertAndSend("/topic/messages/" + username, content);
+    public void sendMessage(String username, Payload  content) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String jsonContent = objectMapper.writeValueAsString(content);
+            messagingTemplate.convertAndSend("/topic/messages/" + username, jsonContent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
+
+
+
 
 
 

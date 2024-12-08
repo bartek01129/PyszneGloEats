@@ -1,6 +1,5 @@
 package com.PyszneGloEats.backend.dto.waiter;
 
-
 import lombok.*;
 
 @Getter
@@ -8,12 +7,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class MessageDto {
-    
+public class Payload {
     private Long id;
-    private String username;
     private int pickUpCode;
-    private String message;
-
 }
-  
