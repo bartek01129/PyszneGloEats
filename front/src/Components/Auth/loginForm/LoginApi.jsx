@@ -1,6 +1,6 @@
 const API_URL = 'http://localhost:8080/auth/login';
 
-export const login = async (email, password) => {
+export const login = async (email, password, setError) => {
   try {
     const response = await fetch(API_URL, {
       method: 'POST',
@@ -15,6 +15,10 @@ export const login = async (email, password) => {
 
       return data;
     } else {
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 4000);
       throw new Error('Login failed');
     }
   } catch (err) {

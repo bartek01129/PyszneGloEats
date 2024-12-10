@@ -25,7 +25,7 @@ export const WaiterOrders = () => {
       });
 
       if (response.ok) {
-        // window.location.reload();
+        window.location.reload();
       } else {
         throw new Error('Failed to prepare order');
       }

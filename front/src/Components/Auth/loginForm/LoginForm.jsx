@@ -8,13 +8,14 @@ import { useNavigate, Link } from 'react-router-dom';
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   const loginSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const data = await login(email, password);
+      const data = await login(email, password, setError);
       localStorage.setItem('token', data.token);
       console.log(data.message);
       const token = localStorage.getItem('token');
@@ -44,6 +45,11 @@ const LoginForm = () => {
           <div className="col-md-5 mt-2 p-0 login">
             <div className="wrapper ">
               <form className="form_input" action="">
+                {error && (
+                  <div className="alert alert-danger" role="alert">
+                    Nieprawidłowy email lub hasło. Zaloguj się ponownie.
+                  </div>
+                )}
                 <h1>Zaloguj się</h1>
                 <div className="input-box">
                   <input

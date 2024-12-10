@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
 import './WaiterService.css';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
 const WaiterService = ({ username }) => {
   const [message, setMessage] = useState(false);
@@ -11,7 +12,13 @@ const WaiterService = ({ username }) => {
 
   const handelPickUp = async (e) => {
     e.preventDefault();
-    await pickUpOrder(orderId, pickUpCode, setMessage, code);
+    if (code == pickUpCode) {
+      await pickUpOrder(orderId, pickUpCode, setMessage, code);
+      setMessage(false);
+      window.location.reload();
+    } else {
+      alert('kod odbioru jest nieprawudłowy');
+    }
   };
 
   useEffect(() => {
@@ -38,10 +45,9 @@ const WaiterService = ({ username }) => {
         <div className="loading-overlay">
           <div className="h4 ">Twoje zamówienie jest gotowe do odbioru!</div>
           <div className="h5">Podaj kod</div>
-          <form
-            className="form-inline waiter-form"
-            onSubmit={() => handelPickUp}
-          >
+          <div className="">{code}</div>
+          <div className="">{pickUpCode}</div>
+          <form className="form-inline waiter-form" onSubmit={handelPickUp}>
             <div className="form-group mx-sm-3 mb-2">
               <input
                 type="text"
@@ -63,13 +69,13 @@ const WaiterService = ({ username }) => {
 
 export default WaiterService;
 
-export const pickUpOrder = async (id, pickUpCode, setMessage, code) => {
+const pickUpOrder = async (id, pickUpCode) => {
   const token = localStorage.getItem('token');
 
   const API_URL = 'http://localhost:8080/guest/order/pickup';
 
   try {
-    const response = await fetch(API_URL, {
+    await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -77,17 +83,11 @@ export const pickUpOrder = async (id, pickUpCode, setMessage, code) => {
       },
       body: JSON.stringify({ id, pickUpCode }),
     });
-
-    if (response.ok) {
-      if (pickUpCode == code) {
-        console.log(code + 'code');
-        console.log(pickUpCode + 'pickUpCode');
-        setMessage(false);
-      }
-    } else {
-      throw new Error('Failed to register');
-    }
   } catch (e) {
     console.log('Error ' + e);
   }
+};
+
+WaiterService.propTypes = {
+  username: propTypes.string,
 };

@@ -20,7 +20,6 @@ export const GetOrders = () => {
     })
       .then((res) => res.json())
       .then((data) => setOrders(data))
-      .then(console.log(orders))
       .catch((err) => console.log(err));
   }, [token, API_URL]);
 
