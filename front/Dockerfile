@@ -11,13 +11,13 @@ COPY . .
 
 RUN npm run build
 
-# Etap 2: Serwowanie aplikacji za pomocą nginx
+
 FROM nginx:alpine
 
-# Kopiowanie zbudowanej aplikacji
+
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Kopiowanie niestandardowej konfiguracji nginx
+
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 

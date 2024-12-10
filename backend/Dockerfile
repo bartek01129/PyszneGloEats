@@ -1,7 +1,12 @@
 FROM openjdk:21
 
-ARG JAR_FILE=target/backend-0.0.1-SNAPSHOT.jar
+WORKDIR /app
 
-COPY ${JAR_FILE} app.jar
+# Kopiowanie pliku JAR
+COPY target/backend-0.0.1-SNAPSHOT.jar app.jar
 
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+# Eksponowanie portu aplikacji
+EXPOSE 8080
+
+# Komenda uruchamiająca aplikację
+ENTRYPOINT ["java", "-jar", "app.jar"]
