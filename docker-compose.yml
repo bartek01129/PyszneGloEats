@@ -3,7 +3,7 @@ version: '3.8'
 services:
   frontend:
     build:
-      context: ../front
+      context: ./front
     ports:
       - '80:80'
     depends_on:
@@ -13,7 +13,7 @@ services:
 
   backend:
     build:
-      context: ../backend
+      context: ./backend
     environment:
       - ***REMOVED***
       - ***REMOVED***
