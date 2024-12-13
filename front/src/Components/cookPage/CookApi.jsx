@@ -4,7 +4,7 @@ import { AssignOrder, DelateOrder } from './cookApiService/CookApiService';
 
 export const GetOrders = () => {
   const token = localStorage.getItem('token');
-  const API_URL = 'http://localhost:8080/cook/orders';
+  const API_URL = import.meta.env.VITE_COOK_ORDERS;
 
   const [orders, setOrders] = useState([]);
   const [expandedOrders, setExpandedOrders] = useState({});

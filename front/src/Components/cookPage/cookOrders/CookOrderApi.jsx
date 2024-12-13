@@ -13,7 +13,7 @@ export const AssignOrders = () => {
   const [orders, setOrders] = useState([]);
   const [expandedOrders, setExpandedOrders] = useState({});
 
-  const API_URL = `http://localhost:8080/cook/cookOrders/${name}`;
+  const API_URL = `${import.meta.env.VITE_COOKS_ORDERS}${name}`;
 
   useEffect(() => {
     fetch(API_URL, {

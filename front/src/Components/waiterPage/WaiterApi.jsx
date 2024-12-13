@@ -4,7 +4,7 @@ import './WaiterPage.css';
 export const WaiterOrders = () => {
   const token = localStorage.getItem('token');
 
-  const API_URL = 'http://localhost:8080/waiter/orders';
+  const API_URL = import.meta.env.VITE_WAITER_ORDERS;
 
   const [orders, setOrders] = useState([]);
   const [expandedOrders, setExpandedOrders] = useState({});
@@ -14,7 +14,7 @@ export const WaiterOrders = () => {
     setLoading(true);
 
     try {
-      const API_URL = `http://localhost:8080/waiter/prepareOrder/${id}`;
+      const API_URL = `${import.meta.env.VITE_WAITER_PREPARE_ORDER}${id}`;
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: {

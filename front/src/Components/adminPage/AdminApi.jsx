@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const API_URL = 'http://localhost:8080/admin/getUsers';
+const API_URL = import.meta.env.VITE_ADMIN_GETUSERS;
 
 const roleOption = ['ROLE_ADMIN', 'ROLE_GUEST', 'ROLE_COOK', 'ROLE_WAITER'];
 
@@ -9,7 +9,9 @@ export const AdminApi = () => {
   const [users, setUsers] = useState([]);
 
   const updateRole = (id, role) => {
-    const API_URL_UPDATE = `http://localhost:8080/admin/update/${id}/${role}`;
+    const API_URL_UPDATE = `${
+      import.meta.env.VITE_ADMIN_SET_ROLE
+    }${id}/${role}`;
 
     fetch(API_URL_UPDATE, {
       method: 'PUT',

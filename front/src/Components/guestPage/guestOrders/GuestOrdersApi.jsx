@@ -22,7 +22,7 @@ export const GuestOrdersApi = () => {
     }));
   };
 
-  const API_URL = `http://localhost:8080/guest/order/orders/${username}`;
+  const API_URL = `${import.meta.env.VITE_GUEST_ORDERS}${username}`;
 
   useEffect(() => {
     fetch(API_URL, {

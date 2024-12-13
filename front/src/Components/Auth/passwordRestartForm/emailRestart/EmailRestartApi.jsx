@@ -1,5 +1,7 @@
 export const EmailRestartApi = async (email, navigate) => {
-  const API_URL = `http://localhost:8080/auth/restartPasswordMail?email=${email}`;
+  const API_URL = `${
+    import.meta.env.VITE_REGISTER_RESTART_MAIL
+  }?email=${email}`;
 
   try {
     const response = await fetch(API_URL, {

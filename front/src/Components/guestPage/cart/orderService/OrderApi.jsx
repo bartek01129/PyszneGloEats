@@ -4,7 +4,7 @@ export const CreateOrder = async () => {
   const decodedPayload = JSON.parse(atob(tokenPayload));
   const username = decodedPayload.sub;
 
-  const API_URL = `http://localhost:8080/guest/createOrder/${username}`;
+  const API_URL = `${import.meta.env.VITE_GUEST_CREATE_ORDER}${username}`;
 
   try {
     const response = await fetch(API_URL, {

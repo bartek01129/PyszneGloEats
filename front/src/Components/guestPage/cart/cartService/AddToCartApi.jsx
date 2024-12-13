@@ -4,7 +4,7 @@ export const AddToCartApi = async (productName, quantity) => {
   const decodedPayload = JSON.parse(atob(tokenPayload));
   const username = decodedPayload.sub;
 
-  const API_URL = 'http://localhost:8080/guest/addProductsToCart';
+  const API_URL = import.meta.env.VITE_GUEST_ADD_TO_CART;
   try {
     const respone = await fetch(API_URL, {
       method: 'PUT',

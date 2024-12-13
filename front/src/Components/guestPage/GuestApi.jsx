@@ -41,7 +41,8 @@ export const GuestApi = () => {
     );
   };
 
-  const API_URL = `http://localhost:8080/guest/getUsersMenuItems/${username}`;
+  const API_URL = `${import.meta.env.VITE_GUEST_MENU_ITEMS}${username}`;
+  // const API_URL = `https://backend-production-25d0.up.railway.app/guest/getUsersMenuItems/${username}`;
   useEffect(() => {
     fetch(API_URL, {
       method: 'GET',

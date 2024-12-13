@@ -15,7 +15,7 @@ export const CartApi = () => {
 
   const [menuItems, setMenuItems] = useState([]);
 
-  const API_URL = `http://localhost:8080/guest/getCart/${name}`;
+  const API_URL = `${import.meta.env.VITE_GUEST_CART}${name}`;
 
   function getImage(imgName) {
     return new URL(`../../../assets/products/${imgName}.jpg`, import.meta.url)
@@ -23,7 +23,6 @@ export const CartApi = () => {
   }
   const handleCreateOrder = async () => {
     await CreateOrder();
-    
   };
 
   useEffect(() => {

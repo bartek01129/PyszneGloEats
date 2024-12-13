@@ -1,4 +1,4 @@
-const API_URL = `http://localhost:8080/auth/restartPassword`;
+const API_URL = import.meta.env.VITE_REGISTER_RESTART_PASSWORD;
 
 export const RestartFormApi = async (token, newPassword, navigate) => {
   const tokenStorage = localStorage.getItem('token');

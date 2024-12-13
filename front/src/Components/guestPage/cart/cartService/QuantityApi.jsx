@@ -4,7 +4,9 @@ export const incrementQuantity = async (productName) => {
   const decodedPayload = JSON.parse(atob(tokenPayload));
   const username = decodedPayload.sub;
 
-  const API_URL = `http://localhost:8080/admin/cart/increment/${username}/${productName}`;
+  const API_URL = `${
+    import.meta.env.VITE_GUEST_INCREMENT
+  }${username}/${productName}`;
 
   try {
     const response = await fetch(API_URL, {
@@ -29,7 +31,9 @@ export const decrementQuantity = async (productName) => {
   const decodedPayload = JSON.parse(atob(tokenPayload));
   const username = decodedPayload.sub;
 
-  const API_URL = `http://localhost:8080/admin/cart/decrement/${username}/${productName}`;
+  const API_URL = `${
+    import.meta.env.VITE_GUEST_DECREMENT
+  }${username}/${productName}`;
 
   try {
     const response = await fetch(API_URL, {
@@ -54,7 +58,7 @@ export const removeItemFromCart = async (productName) => {
   const decodedPayload = JSON.parse(atob(tokenPayload));
   const username = decodedPayload.sub;
 
-  const API_URL = `http://localhost:8080/guest/removeItemFormCart`;
+  const API_URL = import.meta.env.VITE_GUEST_REMOVE_FROM_CART;
 
   try {
     const response = await fetch(API_URL, {

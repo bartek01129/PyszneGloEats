@@ -4,7 +4,7 @@ export const AssignOrder = async (orderID) => {
   const decodedPayload = JSON.parse(atob(tokenPayload));
   const name = decodedPayload.sub;
 
-  const API_URL = `http://localhost:8080/cook/order/assign/${name}/${orderID}`;
+  const API_URL = `${import.meta.env.VITE_COOK_ORDER_ASSING}${name}/${orderID}`;
 
   try {
     const respone = await fetch(API_URL, {
@@ -33,7 +33,7 @@ export const AssignOrder = async (orderID) => {
 export const DelateOrder = async (orderID) => {
   const token = localStorage.getItem('token');
 
-  const API_URL = `http://localhost:8080/cook/order/delete/${orderID}`;
+  const API_URL = `${import.meta.env.VITE_COOK_ORDER_DELETE}${orderID}`;
 
   try {
     const response = await fetch(API_URL, {
@@ -59,7 +59,7 @@ export const DelateOrder = async (orderID) => {
 export const CompletOrder = async (orderID) => {
   const token = localStorage.getItem('token');
 
-  const API_URL = `http://localhost:8080/cook/order/complete/${orderID}`;
+  const API_URL = `${import.meta.env.VITE_COOK_ORDER_COMPLETE}${orderID}`;
 
   try {
     const response = await fetch(API_URL, {
@@ -85,7 +85,7 @@ export const CompletOrder = async (orderID) => {
 export const RemoveOrderFromCook = async (orderID) => {
   const token = localStorage.getItem('token');
 
-  const API_URL = `http://localhost:8080/cook/order/remove/${orderID}`;
+  const API_URL = `${import.meta.env.VITE_COOK_ORDER_REMOVE}${orderID}`;
 
   try {
     const respone = await fetch(API_URL, {

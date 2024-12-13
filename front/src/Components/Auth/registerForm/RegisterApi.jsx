@@ -1,4 +1,4 @@
-const API_URL = `http://localhost:8080/auth/register`;
+const API_URL = import.meta.env.VITE_REGISTE;
 
 export const Register = async (email, name, password) => {
   try {

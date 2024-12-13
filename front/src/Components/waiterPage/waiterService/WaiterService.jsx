@@ -22,7 +22,10 @@ const WaiterService = ({ username }) => {
   };
 
   useEffect(() => {
-    const socket = new SockJS('http://localhost:8080/ws');
+    const socket = new SockJS(`${import.meta.env.VITE_SOCKJS}/ws`);
+    // const socket = new SockJS(
+    //   'https://backend-production-25d0.up.railway.app/ws'
+    // );
     const stompClient = Stomp.over(socket);
 
     stompClient.connect({}, () => {
@@ -72,7 +75,7 @@ export default WaiterService;
 const pickUpOrder = async (id, pickUpCode) => {
   const token = localStorage.getItem('token');
 
-  const API_URL = 'http://localhost:8080/guest/order/pickup';
+  const API_URL = import.meta.env.VITE_WAITER_PICKUP;
 
   try {
     await fetch(API_URL, {
