@@ -5,41 +5,50 @@ import { useNavigate } from 'react-router-dom';
 
 const EmailRestart = () => {
   const [email, setEmail] = useState('');
+  const [error, setError] = useState(false);
+  const [button, setButton] = useState(false);
   const navigate = useNavigate();
   const handleSendEmail = async (e) => {
     e.preventDefault();
-
-    await EmailRestartApi(email, navigate);
+    setButton(true);
+    setTimeout(() => {
+      setButton(false);
+    }, 10000);
+    await EmailRestartApi(email, navigate, setError);
   };
 
   return (
     <div className="emailBody">
-      <form className="row g-3" onSubmit={handleSendEmail}>
-        <div className="col-auto">
-          <label className="visually-hidden">Email</label>
-          <input
-            type="text"
-            className="form-control-plaintext"
-            id="staticEmail2"
-            value="Twój adres email"
-          />
-        </div>
-        <div className="col-auto">
-          <label className="visually-hidden">adres e-mail</label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputPassword2"
-            placeholder="adres E-Mail"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="col-auto">
-          <button type="submit" className="btn btn-primary mb-3">
-            Confirm
-          </button>
-        </div>
-      </form>
+      <div className="card-mail">
+        <form action="" onSubmit={handleSendEmail}>
+          <h1>Wyślij kod do zresetowania hasła</h1>
+
+          <div className="input-box">
+            <input
+              type="text"
+              className="input-mail"
+              id="inputPassword2"
+              placeholder="Adres E-Mail"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          {button ? (
+            <button type="submit" className="btn btn-secondary disabled">
+              Wyślij kod
+            </button>
+          ) : (
+            <button type="submit" className="btn btn-secondary">
+              Wyślij kod
+            </button>
+          )}
+
+          {error && (
+            <div className="alert alert-danger alert-mail m-3 p-3" role="alert">
+              Taki adres e-mail nie istnieje! Spróbuj ponownie za 10 sekund!
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 };

@@ -1,7 +1,5 @@
 const API_URL = import.meta.env.VITE_LOGIN_API;
 
-// const API_URL = 'https://backend-production-25d0.up.railway.app/auth/login';
-
 export const login = async (email, password, setError) => {
   try {
     const response = await fetch(API_URL, {

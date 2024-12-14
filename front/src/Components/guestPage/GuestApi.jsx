@@ -8,9 +8,15 @@ export const GuestApi = () => {
   const username = decodedPayload.sub;
 
   const [products, setProducts] = useState([]);
+  const [accept, setAccept] = useState(false);
 
   const handleAddToCart = async (value, quantity) => {
     await AddToCartApi(value, quantity);
+    setAccept(true);
+    setTimeout(() => {
+      setAccept(false);
+      window.location.reload();
+    }, 1200);
   };
 
   function getImage(imgName) {
@@ -42,7 +48,6 @@ export const GuestApi = () => {
   };
 
   const API_URL = `${import.meta.env.VITE_GUEST_MENU_ITEMS}${username}`;
-  // const API_URL = `https://backend-production-25d0.up.railway.app/guest/getUsersMenuItems/${username}`;
   useEffect(() => {
     fetch(API_URL, {
       method: 'GET',
@@ -64,6 +69,14 @@ export const GuestApi = () => {
 
   return (
     <div className="container-fluid product-container">
+      {accept && (
+        <div className="loading-overlay">
+          <div id="slide-fwd-center">
+            <i className="bi bi-check-circle-fill"></i>
+          </div>
+          <div className="h1 loading-h">Dodałeś produkt do koszyka</div>
+        </div>
+      )}
       <div className="row g-5 m-1">
         {products.map((product) => {
           return (

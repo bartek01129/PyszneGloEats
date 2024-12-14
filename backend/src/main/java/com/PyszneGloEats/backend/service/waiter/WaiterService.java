@@ -47,7 +47,7 @@ public class WaiterService {
         order.setStatus(Order.Status.READY);
         order.setPickUpCode(pickUpCode);
 
-        String body = "To jest twój kod do odbioru zajebistego żarcia kurwo jebana: ";
+        String body = "To jest twój kod do odbioru: ";
         emailSenderService.sendEmail(new EmailDTO(user.getEmail(), "Kod odbioru", body + pickUpCode));
         
         orderRepository.save(order);

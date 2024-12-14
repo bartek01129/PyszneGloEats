@@ -9,25 +9,25 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  min-width: 100vw;
+  background-color: var(--bg);
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
 }
 
 .restartFormWrapper {
-  width: 420px;
-  background-color: #201d1d;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(30px);
-  color: #ffffff;
+  padding: 20px;
+  width: 70%;
+  height: 40vh;
   border-radius: 10px;
-  padding: 30px 40px;
+  background-color: var(--gray-700);
+  box-shadow: -4px -2px 67px -5px rgb(90, 91, 95);
 }
 
 .restartFormWrapper h1 {
   font-size: 36px;
   text-align: center;
+  color: gainsboro;
 }
 
 .restartFormWrapper .input-box {

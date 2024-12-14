@@ -28,7 +28,7 @@ const RestartForm = () => {
             <input
               type="text"
               onChange={(e) => setToken(e.target.value)}
-              placeholder="kod autoryzacyjny"
+              placeholder="Kod autoryzacyjny"
               required
             />
           </div>
@@ -37,7 +37,7 @@ const RestartForm = () => {
             <input
               type="password"
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
+              placeholder="Hasło"
               required
             />
           </div>
@@ -46,7 +46,7 @@ const RestartForm = () => {
             <input
               type="password"
               onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Repeat Password"
+              placeholder="Powtórz hasło"
               required
             />
           </div>

@@ -89,7 +89,7 @@ const LoginForm = () => {
               </form>
             </div>
           </div>
-          <div className="col-md-5 mt-2 info gradient-custom p-4">
+          <div className="col-md-5 mt-2 info gradient-custom p-4 card_history">
             <h1 className="text-center">Nasza historia</h1>
             <p className="h5">
               Marcin, utalentowany kucharz z małego miasteczka, zainwestował

@@ -1,4 +1,4 @@
-export const EmailRestartApi = async (email, navigate) => {
+export const EmailRestartApi = async (email, navigate, setError) => {
   const API_URL = `${
     import.meta.env.VITE_REGISTER_RESTART_MAIL
   }?email=${email}`;
@@ -13,14 +13,15 @@ export const EmailRestartApi = async (email, navigate) => {
     });
 
     if (response.ok) {
-      const data = await response.json();
-      console.log(data);
       navigate(`/auth/restartPassword`);
-      return data;
     } else {
       throw new Error('Failed to send message');
     }
   } catch (e) {
     console.log('Error ' + e);
+    setError(true);
+    setTimeout(() => {
+      setError(false);
+    }, 10000);
   }
 };

@@ -23,9 +23,6 @@ const WaiterService = ({ username }) => {
 
   useEffect(() => {
     const socket = new SockJS(`${import.meta.env.VITE_SOCKJS}/ws`);
-    // const socket = new SockJS(
-    //   'https://backend-production-25d0.up.railway.app/ws'
-    // );
     const stompClient = Stomp.over(socket);
 
     stompClient.connect({}, () => {
@@ -48,8 +45,6 @@ const WaiterService = ({ username }) => {
         <div className="loading-overlay">
           <div className="h4 ">Twoje zamówienie jest gotowe do odbioru!</div>
           <div className="h5">Podaj kod</div>
-          <div className="">{code}</div>
-          <div className="">{pickUpCode}</div>
           <form className="form-inline waiter-form" onSubmit={handelPickUp}>
             <div className="form-group mx-sm-3 mb-2">
               <input

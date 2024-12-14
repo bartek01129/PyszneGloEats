@@ -9,6 +9,8 @@ const RegisterForm = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [warning, setWarning] = useState(false);
+  const [passError, setPassError] = useState(false);
 
   const navigate = useNavigate();
 
@@ -17,14 +19,12 @@ const RegisterForm = () => {
 
     try {
       if (password === confirmPassword) {
-        console.log('email: ' + email);
-        console.log('name: ' + name);
-        console.log('pass1: ' + password);
-        console.log('pass2: ' + confirmPassword);
-        await Register(email, name, confirmPassword);
-        navigate('/auth/login');
+        await Register(email, name, confirmPassword, navigate, setWarning);
       } else {
-        alert('Hasła nie zgadzają się');
+        setPassError(true);
+        setTimeout(() => {
+          setPassError(false);
+        }, 3000);
       }
     } catch (e) {
       throw new Error(e);
@@ -84,6 +84,16 @@ const RegisterForm = () => {
         <div className="col-md-6 d-flex justify-content-center">
           <div className="wrapper-register">
             <form action="">
+              {warning && (
+                <div className="alert alert-danger" role="alert">
+                  Taki adres e-mail lub nazwa użykownika jest już zajęta!
+                </div>
+              )}
+              {passError && (
+                <div className="alert alert-danger" role="alert">
+                  Hasła nie są identyczne
+                </div>
+              )}
               <h1>Załóż konto</h1>
 
               <div className="input-box">

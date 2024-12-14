@@ -4,7 +4,7 @@ export const AssignOrder = async (orderID) => {
   const decodedPayload = JSON.parse(atob(tokenPayload));
   const name = decodedPayload.sub;
 
-  const API_URL = `${import.meta.env.VITE_COOK_ORDER_ASSING}${name}/${orderID}`;
+  const API_URL = `${import.meta.env.VITE_COOK_ORDER_ASSIGN}${name}/${orderID}`;
 
   try {
     const respone = await fetch(API_URL, {

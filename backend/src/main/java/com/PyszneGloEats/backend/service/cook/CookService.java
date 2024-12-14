@@ -55,7 +55,7 @@ public class CookService {
         List<Order> cookOrders = orderRepository.findAll();
 
         for (Order order : cookOrders) {
-            if (order.getCook() != null && order.getCook().getName().equals(username)) {
+            if (order.getCook() != null && order.getCook().getName().equals(username) && order.getStatus() == Order.Status.IN_PROGRESS) {
                 System.out.println("order: " + order);
                 orders.add(order);
             }
