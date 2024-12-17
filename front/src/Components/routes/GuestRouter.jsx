@@ -3,13 +3,25 @@ import { Route, Routes } from 'react-router-dom';
 import GuestPage from '../guestPage/GuestPage';
 import Cart from '../guestPage/cart/Cart';
 import GuestOrdersPage from '../guestPage/guestOrders/GuestOrdersPage';
+import ProtectedRoute from './ProtectedRoute';
 
 function GuestRouter() {
   return (
     <Routes>
-      <Route path="/guest/products" element={<GuestPage />} />
-      <Route path="/guest/cart" element={<Cart />} />
-      <Route path="/guest/orders" element={<GuestOrdersPage />} />
+      <Route
+        path="/guest/products"
+        element={<ProtectedRoute element={<GuestPage />} role="ROLE_GUEST" />}
+      />
+      <Route
+        path="/guest/cart"
+        element={<ProtectedRoute element={<Cart />} role="ROLE_GUEST" />}
+      />
+      <Route
+        path="/guest/orders"
+        element={
+          <ProtectedRoute element={<GuestOrdersPage />} role="ROLE_GUEST" />
+        }
+      />
     </Routes>
   );
 }

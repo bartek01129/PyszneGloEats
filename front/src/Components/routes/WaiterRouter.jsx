@@ -1,10 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
 import WaiterPage from '../waiterPage/WaiterPage';
+import ProtectedRoute from './ProtectedRoute';
 
 function WaiterRouter() {
   return (
     <Routes>
-      <Route path="/waiter" element={<WaiterPage />} />
+      <Route
+        path="/waiter"
+        element={<ProtectedRoute element={<WaiterPage />} role="ROLE_WAITER" />}
+      />
     </Routes>
   );
 }
