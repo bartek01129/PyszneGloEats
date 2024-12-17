@@ -48,6 +48,7 @@ const EmailRestart = () => {
             </div>
           )}
         </form>
+        
       </div>
     </div>
   );
