@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function checkRole(requiredRole) {
   const token = localStorage.getItem('token');
 
-  if (!token) return <Navigate to="/auth/login" replace />;
+  if (!token) return false;
 
   try {
     const payload = JSON.parse(atob(token.split('.')[1]));
@@ -16,7 +16,13 @@ function checkRole(requiredRole) {
 }
 
 const ProtectedRoute = ({ element, role }) => {
+  const token = localStorage.getItem('token');
   const hasAccess = checkRole(role);
+
+  if (!token) {
+    return <Navigate to="/auth/login" replace />;
+  }
+
   return hasAccess ? element : <Navigate to="/auth/page403" replace />;
 };
 
@@ -24,4 +30,5 @@ ProtectedRoute.propTypes = {
   element: PropTypes.element.isRequired,
   role: PropTypes.string.isRequired,
 };
+
 export default ProtectedRoute;

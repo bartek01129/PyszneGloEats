@@ -7,11 +7,11 @@ function CookRouter() {
   return (
     <Routes>
       <Route
-        path="/cook"
+        path=""
         element={<ProtectedRoute element={<CookPage />} role="ROLE_COOK" />}
       />
       <Route
-        path="/cook/assignOrders"
+        path="assignOrders"
         element={
           <ProtectedRoute element={<CookOrderPage />} role="ROLE_COOK" />
         }

@@ -9,15 +9,15 @@ function GuestRouter() {
   return (
     <Routes>
       <Route
-        path="/guest/products"
+        path="products"
         element={<ProtectedRoute element={<GuestPage />} role="ROLE_GUEST" />}
       />
       <Route
-        path="/guest/cart"
+        path="cart"
         element={<ProtectedRoute element={<Cart />} role="ROLE_GUEST" />}
       />
       <Route
-        path="/guest/orders"
+        path="orders"
         element={
           <ProtectedRoute element={<GuestOrdersPage />} role="ROLE_GUEST" />
         }

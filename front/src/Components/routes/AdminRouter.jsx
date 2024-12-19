@@ -6,7 +6,7 @@ function AdminRouter() {
   return (
     <Routes>
       <Route
-        path="/admin/users"
+        path="users"
         element={<ProtectedRoute element={<AdminPage />} role="ROLE_ADMIN" />}
       />
     </Routes>

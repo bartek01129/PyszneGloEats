@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
 import './WaiterService.css';
-import { propTypes } from 'react-bootstrap/esm/Image';
+import PropTypes from 'prop-types';
 
 const WaiterService = ({ username }) => {
   const [message, setMessage] = useState(false);
@@ -87,5 +87,5 @@ const pickUpOrder = async (id, pickUpCode) => {
 };
 
 WaiterService.propTypes = {
-  username: propTypes.string,
+  username: PropTypes.string,
 };

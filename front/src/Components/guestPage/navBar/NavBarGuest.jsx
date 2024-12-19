@@ -29,33 +29,23 @@ export const NavBarGuest = () => {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link
-                to={{
-                  pathname: `/guest/products`,
-                }}
+                className="nav-link"
+                aria-current="page"
+                to="/guest/products"
               >
-                <a className="nav-link " aria-current="page" href="#">
-                  Sklep
-                </a>
+                Sklep
               </Link>
             </li>
             <li className="nav-item">
-              <Link
-                to={{
-                  pathname: `/guest/orders`,
-                }}
-              >
-                <a className="nav-link" href="#">
-                  Moje zamówienia
-                </a>
+              <Link className="nav-link" to="/guest/orders">
+                Moje zamówienia
               </Link>
             </li>
           </ul>
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link to="/guest/cart">
-                <a className="nav-link " href="#">
-                  <i className="bi bi-basket2 p-2"></i>Koszyk
-                </a>
+              <Link className="nav-link" to="/guest/cart">
+                <i className="bi bi-basket2 p-2"></i>Koszyk
               </Link>
             </li>
             <li className="nav-item active ">

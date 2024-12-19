@@ -71,9 +71,7 @@ const LoginForm = () => {
                   <FaLock className="icon" />
                 </div>
                 <div className="forgot-password mb-4 d-flex justify-content-end h6 w-100">
-                  <a href="#">
-                    <Link to="/auth/emailRestart">Zapomniałeś hasła?</Link>
-                  </a>
+                  <Link to="/auth/emailRestart">Zapomniałeś hasła?</Link>
                 </div>
 
                 <button type="submit" onClick={loginSubmit}>

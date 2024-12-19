@@ -84,8 +84,10 @@ export const CartApi = () => {
 
           <tbody>
             {menuItems.map((item) => {
+              const uniqueKey = item.id || item.productName;
+
               return (
-                <tr className="productRow" key={item.id}>
+                <tr className="productRow" key={uniqueKey}>
                   <td className="img-wrapper">
                     <img
                       className="img-fluid cart-img"
@@ -129,7 +131,7 @@ export const CartApi = () => {
         <div className="button-wrapper">
           <button
             className="btn btn-success order-button"
-            onClick={() => handleCreateOrder()}
+            onClick={handleCreateOrder}
           >
             Zamów
           </button>

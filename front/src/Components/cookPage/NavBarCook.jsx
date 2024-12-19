@@ -10,14 +10,8 @@ const NavBarCook = () => {
   return (
     <nav className="navbar m-0 navbar-expand-lg  navbar-guest">
       <div className="container-fluid navbar-guest-container">
-        <Link
-          to={{
-            pathname: `/cook`,
-          }}
-        >
-          <a className="navbar-brand ">
-            Pyszne<span>Glo</span>Eats
-          </a>
+        <Link to="/cook" className="navbar-brand">
+          Pyszne<span>Glo</span>Eats
         </Link>
         <button
           className="navbar-toggler"
@@ -33,25 +27,13 @@ const NavBarCook = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link
-                to={{
-                  pathname: `/cook`,
-                }}
-              >
-                <a className="nav-link" href="#">
-                  Wszystkie zamówienia
-                </a>
+              <Link to="/cook" className="nav-link">
+                Wszystkie zamówienia
               </Link>
             </li>
             <li className="nav-item">
-              <Link
-                to={{
-                  pathname: `/cook/assignOrders`,
-                }}
-              >
-                <a className="nav-link" href="#">
-                  Moje zamówienia
-                </a>
+              <Link to="/cook/assignOrders" className="nav-link">
+                Moje zamówienia
               </Link>
             </li>
           </ul>

@@ -6,7 +6,7 @@ function WaiterRouter() {
   return (
     <Routes>
       <Route
-        path="/waiter"
+        path=""
         element={<ProtectedRoute element={<WaiterPage />} role="ROLE_WAITER" />}
       />
     </Routes>

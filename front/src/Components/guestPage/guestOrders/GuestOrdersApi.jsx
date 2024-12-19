@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './GuestOrdersPage.css';
 
 export const GuestOrdersApi = () => {
@@ -51,8 +51,8 @@ export const GuestOrdersApi = () => {
           </thead>
           <tbody className="table-group-divider">
             {orders.map((order) => (
-              <>
-                <tr key={order.id} className="text-center">
+              <React.Fragment key={order.id}>
+                <tr className="text-center">
                   <th onClick={() => handleOpenOrder(order.id)} scope="row">
                     {order.id}
                   </th>
@@ -70,24 +70,23 @@ export const GuestOrdersApi = () => {
                   <tr className="additional-info">
                     <td colSpan="5" className="tescik">
                       <div className="info-container">
-                        {order.cartItems.map((item) => {
-                          return (
-                            <div key={item.id} className="product-info">
-                              <img
-                                className="productImage"
-                                src={getImage(item.menuItem.productName)}
-                              />
-                              <p>{item.menuItem.productName}</p>
-                              <p>{item.menuItem.description}</p>
-                              <p>Ilość: {item.quantity}</p>
-                            </div>
-                          );
-                        })}
+                        {order.cartItems.map((item) => (
+                          <div key={item.id} className="product-info">
+                            <img
+                              className="productImage"
+                              src={getImage(item.menuItem.productName)}
+                              alt={item.menuItem.productName}
+                            />
+                            <p>{item.menuItem.productName}</p>
+                            <p>{item.menuItem.description}</p>
+                            <p>Ilość: {item.quantity}</p>
+                          </div>
+                        ))}
                       </div>
                     </td>
                   </tr>
                 )}
-              </>
+              </React.Fragment>
             ))}
           </tbody>
         </table>
