@@ -3,6 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { MdAlternateEmail } from 'react-icons/md';
 import './Register.css';
 import { Register } from './RegisterApi';
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { Link } from 'react-router-dom';
+
+
+
 
 const RegisterForm = () => {
   const [password, setPassword] = useState('');
@@ -11,8 +16,12 @@ const RegisterForm = () => {
   const [email, setEmail] = useState('');
   const [warning, setWarning] = useState(false);
   const [passError, setPassError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+
 
   const navigate = useNavigate();
+
 
   const handleRegisier = async (e) => {
     e.preventDefault();
@@ -98,7 +107,7 @@ const RegisterForm = () => {
 
               <div className="input-box">
                 <input
-                  type="text"
+                  type="email"
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="E-mail (wymagane)"
                   required
@@ -111,17 +120,23 @@ const RegisterForm = () => {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Imię (wymagane)"
                   required
-                />
+                /> 
               </div>
 
               <div className="input-box">
-                <input
-                  type="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Hasło (wymagane)"
-                  required
-                />
-              </div>
+              <input
+                type={showPassword ? "text" : "password"}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Hasło (wymagane)"
+                required
+              />
+              {showPassword ? (
+                <AiFillEye className='eye-icon icon' onClick={() => setShowPassword((prevState) => !prevState)} />
+              ) : (
+                <AiFillEyeInvisible className='eye-icon icon' onClick={() => setShowPassword((prevState) => !prevState)} />
+
+              )}
+            </div>
 
               <div className="input-box">
                 <input
@@ -139,6 +154,12 @@ const RegisterForm = () => {
                 Zarejestruj się
               </button>
             </form>
+                <div>
+                  <p>
+                    Masz już konto?{' '}
+                    <Link to="/auth/login">Zaloguj się</Link>
+                  </p>
+                </div>
           </div>
         </div>
       </div>
