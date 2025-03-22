@@ -57,4 +57,5 @@ Projekt pozwolił mi wykazać się w następujących obszarach:
 
 ## Kontakt
 Masz pytania lub chcesz porozmawiać o projekcie? Napisz do mnie!  
-- **E-mail**: mBarlik84@gmail.com  
+- **E-mail**: mBarlik84@gmail.com
+- **E-mail**: bartek011229@gmail.com
